@@ -11,11 +11,7 @@ async function seed() {
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
   ])
-  const products = await Promise.all([
-    Product.create({model: '700', brand: 'Yeezy', price: 300}),
-    Product.create({model: '1', brand: 'Jordan', price: 180}),
-    Product.create({model: '5', brand: 'Jordan', price: 200})
-  ])
+
   const sizes = await Promise.all([
     Size.create({length: 6}),
     Size.create({length: 7}),
@@ -27,7 +23,13 @@ async function seed() {
     Size.create({length: 13}),
     Size.create({length: 14})
   ])
-  const [pSeven, pOne, pFive] = products
+  const products = await Promise.all([
+    Product.create({model: '700', brand: 'Yeezy', price: 300}),
+    Product.create({model: '1', brand: 'Jordan', price: 180}),
+    Product.create({model: '5', brand: 'Jordan', price: 200})
+  ])
+
+  const [one, two, three] = products
   const [
     six,
     seven,
@@ -39,11 +41,9 @@ async function seed() {
     thirteen,
     fourteen
   ] = sizes
-  await Promise.all([pSeven.setSizes(six), pOne.setSizes([eight, nine])])
-  //pSeven.setSizes(six)
-  console.log('pseven', pSeven)
-  console.log('six', six)
-  // console.log(products, '<<PRODUCTS')
+
+  await one.addSize(seven, {through: {quantity: 50}})
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }

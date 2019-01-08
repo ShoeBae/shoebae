@@ -7,8 +7,8 @@ const ProductSize = require('./productsize')
 Review.belongsTo(Product)
 Product.hasMany(Review)
 
-Product.belongsToMany(Size, {as: 'availableSizes', through: 'ProductSize'})
-Size.belongsToMany(Product, {as: 'productsInThatSize', through: 'ProductSize'})
+Product.belongsToMany(Size, {through: ProductSize})
+Size.belongsToMany(Product, {through: ProductSize})
 
 /**
  * If we had any associations to make, this would be a great place to put them!
