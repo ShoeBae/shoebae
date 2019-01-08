@@ -2,6 +2,13 @@ const router = require('express').Router()
 const {Product, Size} = require('../db/models')
 module.exports = router
 
+const isAdmin = (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    res.sendStatus(403)
+    return next(new Error('Access Denied'))
+  }
+}
+
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
