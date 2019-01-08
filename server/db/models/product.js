@@ -21,7 +21,8 @@ const Product = db.define('product', {
     type: Sequelize.ENUM('boot', 'dress', 'sneaker')
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2)
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false
   }
 })
 
