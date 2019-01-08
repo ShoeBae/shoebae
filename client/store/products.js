@@ -93,7 +93,7 @@ export default function(state = initialState, action) {
     case EDIT_PRODUCT:
       return {
         ...state,
-        productList: state.productsList.map(
+        productsList: state.productsList.map(
           product =>
             product.productID === action.product.productID
               ? action.product
@@ -105,7 +105,7 @@ export default function(state = initialState, action) {
     case REMOVE_PRODUCT:
       return {
         ...state,
-        productList: state.productsList.filter(
+        productsList: state.productsList.filter(
           product => product !== action.product
         )
       }
