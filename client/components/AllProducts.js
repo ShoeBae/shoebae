@@ -13,5 +13,17 @@ class AllProducts extends Component {
   }
 }
 
-///map to state
-//export connected state
+const mapStateToProps = state => {
+  return {
+    products: state.products.productsList
+  }
+}
+
+const dispatchToProps = dispatch => {
+  return {
+    fetchProducts: () => dispatch(fetchProducts()),
+    deleteProduct: productID => dispatch(deleteProduct(productID))
+  }
+}
+
+export default connect(mapStateToProps, dispatchToProps)(AllProducts)
