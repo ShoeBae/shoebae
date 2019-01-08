@@ -11,16 +11,16 @@ class AllProducts extends Component {
     return (
       <div className="productsList">
         <form>
-          SORT{' '}
+          FILTER{' '}
           <select
-            name="sortBy"
+            name="filterBy"
             onChange={event => {
               this.props.fetchProducts(event.target.value)
             }}
           >
-            <option value="brand">Brand</option>
-            <option value="model">Name</option>
-            <option value="price">Price</option>
+            <option value="boots">Boots</option>
+            <option value="dress">Dress</option>
+            <option value="sneakers">Sneakers</option>
           </select>
         </form>
         {this.props.products.map(product => (
@@ -45,7 +45,7 @@ const mapStateToProps = state => {
 
 const dispatchToProps = dispatch => {
   return {
-    fetchProducts: sortBy => dispatch(fetchProducts(sortBy)),
+    fetchProducts: filterBy => dispatch(fetchProducts(filterBy)),
     deleteProduct: productID => dispatch(deleteProduct(productID))
   }
 }
