@@ -48,9 +48,9 @@ export const selectProduct = productID => async dispatch => {
   }
 }
 
-export const fetchProducts = filterBy => async dispatch => {
+export const fetchProducts = sortBy => async dispatch => {
   try {
-    const res = await axios.get(`/api/products/${filterBy}`)
+    const res = await axios.get(`/api/products/${sortBy}`)
     const products = res.data
     dispatch(setProducts(products))
   } catch (err) {
