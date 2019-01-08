@@ -15,7 +15,7 @@ class AllProducts extends Component {
           <select
             name="sortBy"
             onChange={event => {
-              this.props.fetchProducts(event.target.value)
+              console.log('lets sort this real soon!')
             }}
           >
             <option value="brand">Brand</option>
