@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Navbar from './Navbar'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts, deleteProduct} from '../store/products'
@@ -9,13 +8,29 @@ class AllProducts extends Component {
     this.props.fetchProducts()
   }
   render() {
-    return <h1>Hello World!</h1>
+    return (
+      <div className="productsList">
+        <form>
+          SORT BY{' '}
+          <select
+            name="sortBy"
+            onChange={event => {
+              this.props.fetchProducts(event.target.value)
+            }}
+          >
+            <option value="brand">Brand</option>
+            <option value="model">Name</option>
+            <option value="price">Price</option>
+          </select>
+        </form>
+      </div>
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    products: state.products.productsList
+    products: state.productsList
   }
 }
 
