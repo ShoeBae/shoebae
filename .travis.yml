@@ -14,14 +14,14 @@ notifications:
 install:
   - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "shoebae-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: shoebae # see README
+  api_key:
+    secure: Q14Y+IkHxztfj9gtUK07CKtHp8/E235k0iqhK1GGhblcfz+lpOHfg2dPwYQpG7r0TkWr5nryxzjwh1KOZWNwWLF8mSMcuRIJob9cEuhcEo/EifPrtFGeDbahTZD22h4qkGaKwxRTfwnXWGofngapZ5iCZ7w6hxjwx3lL0+VyHVC0uKe0DvYHcRuEhRk/jaJzypa2yyGQW1K1r3hXpAhOnxvPgA08pNbqmWNfAzYz5lSVQzUdYy9i33i6TRSsTPJptOIb2IUheUGRXk1bCJ63Ybo8kAUSRI95nSTmwvgurQuI+nzTjbjJDcpaUIAPPWO2QP5GQ5edZpEa7QgXmDcWiJGiOJyaLFkn7gqPvD81TXxF71JmKgrKW467alNI1rsh4mhHFvpe1zvy8rikY3tgh6lZFTRDPpmFZSat1qXDQQZghuSeUpp1U0IxQt6JcjB6XnpfIPlkuZd8/4TG/zuD2xpq9wOczNwWIpNce+QMgFWHwq2hn4Tmi6QoYpqxHePYqndKieLcAgFEbFeKa4W3wfMsLgEj4o2tAn0xXTrp/nI9RRL4j5oC/Er6bdUNDzFHhxeypsJvF+x9ChT2CHXEHbm2p0KITuYYDraigH/yJYVzeerJpVNR40u6/AVJEEa9cAj5StT82C0cxyJL3fNBivQjs8ZHnnFiHeTVeZ80OYg= # see README
