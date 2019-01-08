@@ -73,7 +73,7 @@ export const putProduct = (productID, changes) => async dispatch => {
 
 export const deleteProduct = productID => async dispatch => {
   try {
-    const rest = await axios.delete(`/api/products/${productID}`)
+    const res = await axios.delete(`/api/products/${productID}`)
     const product = res.data
     dispatch(deleteProduct(product))
   } catch (err) {
