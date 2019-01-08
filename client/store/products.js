@@ -94,7 +94,7 @@ export default function(state = initialState, action) {
         ...state,
         productsList: state.productsList.map(
           product =>
-            product.productID === action.product.productID
+            product.id === action.product.id
               ? action.product
               : product
         )
