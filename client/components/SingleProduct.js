@@ -3,23 +3,36 @@ import {connect} from 'react-redux'
 import {selectProduct} from '../store/products'
 
 class SingleProduct extends Component {
-  componenetDidMount() {
+  componentDidMount() {
     const {id} = this.props.match.params
-    this.props.getProduct(id)
+    this.props.selectProduct(id)
   }
   render() {
-    console.log(this.props, '<<PROPS')
-    return <div className="single-product">blah</div>
+    const {products: {currentProduct}} = this.props
+    if (!currentProduct.model) return <div>Loading...</div>
+    console.log(currentProduct.sizes.length)
+    return (
+      <div className="single-product">
+        <img src={`/${currentProduct.imageUrl}`} />
+        <div>
+          {currentProduct.brand}
+          {currentProduct.model}
+        </div>
+        <div>
+          Sizes:{' '}
+          {currentProduct.sizes.map(size => {
+            return <div key={size.length}>{size.length}</div>
+          })}
+        </div>
+      </div>
+    )
   }
 }
 
-const mapState = (state, ownProps) => ({
-  state,
-  ownProps
-})
+const mapState = ({products, user}) => ({products, user})
 
 const mapDispatch = dispatch => ({
-  getProduct: id => {
+  selectProduct: id => {
     dispatch(selectProduct(id))
   }
 })
