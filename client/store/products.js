@@ -26,7 +26,7 @@ const getProduct = product => ({type: GET_PRODUCT, product})
 const setProducts = products => ({type: SET_PRODUCTS, products})
 const addProduct = product => ({type: ADD_PRODUCT, product})
 const editProduct = product => ({type: EDIT_PRODUCT, product})
-const removeProduct = () => ({type: REMOVE_PRODUCT})
+const removeProduct = productID => ({type: REMOVE_PRODUCT, productID})
 
 /**
  * THUNK CREATORS
@@ -73,9 +73,8 @@ export const putProduct = (productID, changes) => async dispatch => {
 
 export const deleteProduct = productID => async dispatch => {
   try {
-    const res = await axios.delete(`/api/products/${productID}`)
-    const product = res.data
-    dispatch(deleteProduct(product))
+    await axios.delete(`/api/products/${productID}`)
+    dispatch(removeProduct(productID))
   } catch (err) {
     console.log(err)
   }
@@ -106,7 +105,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         productsList: state.productsList.filter(
-          product => product !== action.product
+          product => product.id !== action.productID
         )
       }
     default:
