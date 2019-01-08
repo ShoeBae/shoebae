@@ -11,7 +11,7 @@ class AllProducts extends Component {
     return (
       <div className="productsList">
         <form>
-          SORT BY{' '}
+          SORT{' '}
           <select
             name="sortBy"
             onChange={event => {
@@ -45,7 +45,7 @@ const mapStateToProps = state => {
 
 const dispatchToProps = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts()),
+    fetchProducts: sortBy => dispatch(fetchProducts(sortBy)),
     deleteProduct: productID => dispatch(deleteProduct(productID))
   }
 }
