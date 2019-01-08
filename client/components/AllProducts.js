@@ -23,6 +23,15 @@ class AllProducts extends Component {
             <option value="price">Price</option>
           </select>
         </form>
+        {this.props.products.map(product => (
+          <div key={product.id}>
+            <Link className="linkText" to={`/products/${product.id}`}>
+              <img src={product.imageUrl} /> {product.model}
+              <br />
+              {'$' + product.price}
+            </Link>
+          </div>
+        ))}
       </div>
     )
   }
@@ -30,7 +39,7 @@ class AllProducts extends Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.productsList
+    products: state.products.productsList
   }
 }
 

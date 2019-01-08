@@ -14,7 +14,14 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
  * INITIAL STATE
  */
 const initialState = {
-  productsList: [],
+  productsList: [
+    {
+      model: 'the morgan',
+      color: 'rainbow',
+      brand: 'offwhite',
+      price: 120
+    }
+  ],
   currentProduct: {}
   //?? isAdmin: false
 }
@@ -94,9 +101,7 @@ export default function(state = initialState, action) {
         ...state,
         productsList: state.productsList.map(
           product =>
-            product.id === action.product.id
-              ? action.product
-              : product
+            product.id === action.product.id ? action.product : product
         )
       }
     case ADD_PRODUCT:
