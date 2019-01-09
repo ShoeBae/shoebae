@@ -12,32 +12,38 @@ class AllProducts extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  componentDidMount() {
-    console.log('TESTING', this.props.products)
-    this.props.fetchProducts()
+  async componentDidMount() {
+    await this.props.fetchProducts()
+    this.setState({currentView: this.props.products})
   }
+
   handleChange(event) {
-    console.log(event.target.value)
+    if (event.target.value === 'all') {
+      this.setState({currentView: this.props.products})
+    } else {
+      this.setState({
+        currentView: this.props.products.filter(product => {
+          return product.category === event.target.value
+        })
+      })
+    }
   }
 
   render() {
-    console.log(this.props)
+    if (!this.props.products[0]) {
+      return <div>...loading</div>
+    }
     return (
       <div className="productsList">
         <form>
-          SORT{' '}
-          <select
-            name="sortBy"
-            onChange={event => {
-              console.log('lets sort this real soon!')
-            }}
-          >
-            <option value="brand">Brand</option>
-            <option value="model">Name</option>
-            <option value="price">Price</option>
+          <select name="sortBy" onChange={this.handleChange}>
+            <option value="all">All Categories</option>
+            <option value="boot">Boots</option>
+            <option value="dress">Dress</option>
+            <option value="sneaker">Sneakers</option>
           </select>
         </form>
-        {this.props.products.map(product => (
+        {this.state.currentView.map(product => (
           <div key={product.id}>
             <Link className="linkText" to={`/products/${product.id}`}>
               <img src={product.imageUrl} /> {product.model}
