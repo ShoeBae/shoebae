@@ -4,9 +4,21 @@ import {connect} from 'react-redux'
 import {fetchProducts, deleteProduct} from '../store/products'
 
 class AllProducts extends Component {
+  constructor() {
+    super()
+    this.state = {
+      currentView: []
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+
   componentDidMount() {
     this.props.fetchProducts()
   }
+  handleChange(event) {
+    console.log(event.target.value)
+  }
+
   render() {
     return (
       <div className="productsList">
