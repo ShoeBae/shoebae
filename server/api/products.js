@@ -21,6 +21,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
+    //Product.findByPk(req.params.productId, { include: [...]}
     const product = await Product.findAll({
       where: {
         // REVIEW: use findById
@@ -34,10 +35,36 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+User.adminWritableFields = ['isAdmin', 'firstname', 'lastname', 'email']
+User.userWritableFields = ['firstname', 'lastname', 'email']
+Product.writableFields = ['title', 'price', 'categoryId']
+
+
+// ../util.js
+
+function requireLogin (req, res, next) {
+  if (req.user) {
+    return next()
+  }
+  res.sendStatus(401)
+}
+
+function requireAdmin (req, res, next) {
+  if (req.user.isAdmin) {
+    return next()
+  }
+  res.sendStatus(403)
+}
+
+
+router.post('/', requireLogin, requireAdmin, async (req, res, next) => {
   try {
     // REVIEW: don't pass req.body into `create` or `update` (anything really)
-    const product = await Product.create(req.body)
+    const productAttributes = _.pick(req.body, Product.writableFields);
+    //const {title} = {}
+    //product.update({ title: undefined })
+    //product.update({})
+    const product = await Product.create(productAttributes)
     res.json(product)
   } catch (err) {
     next(err)
@@ -76,3 +103,34 @@ router.delete('/:productId', async (req, res, next) => {
     next(err)
   }
 })
+
+
+
+
+
+
+cartRouter.put('/cart', requireLogin, async (req, res, next) => {
+  if (req.user.isAdmin) {
+    // update cart
+  }
+  else {
+    // cart = Cart.findById(???)
+    // if (cart.userId === req.user.id) {
+    //   update cart
+    // }
+    // res.sendStatus(403)
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
