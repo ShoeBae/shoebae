@@ -1,5 +1,14 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -18,4 +27,54 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/*****
+**  Flex Classes
+*****/
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*****
+**  Single Product View
+*****/
+
+.single-product {
+  display: flex;
+  background-color: aqua;
+  margin: 10px;
+}
+
+.single-product > * {
+  margin: 10px;
+}
+
+.single-product .images {
+  flex: 2.5;
+  background-color: teal;
+}
+
+.single-product .images img {
+  /** to be determined **/
+}
+
+.single-product .content {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+.single-product .add-to-cart {
+  display: flex;
+  flex-direction: column;
+}
+
+.single-product .add-to-cart > * {
+  height: 60px;
+  margin: 5px 0px 5px 0px;
+  border-radius: 0px;
 }

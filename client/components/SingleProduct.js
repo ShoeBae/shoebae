@@ -7,22 +7,32 @@ class SingleProduct extends Component {
     const {id} = this.props.match.params
     this.props.selectProduct(id)
   }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    console.log('ADDED TO CART')
+  }
   render() {
     const {products: {currentProduct}} = this.props
     if (!currentProduct.model) return <div>Loading...</div>
     console.log(currentProduct.sizes.length)
     return (
       <div className="single-product">
-        <img src={`/${currentProduct.imageUrl}`} />
-        <div>
-          {currentProduct.brand}
-          {currentProduct.model}
+        <div className="images">
+          <img src={`/${currentProduct.imageUrl}`} />
         </div>
-        <div>
-          Sizes:{' '}
-          {currentProduct.sizes.map(size => {
-            return <div key={size.length}>{size.length}</div>
-          })}
+        <div className="content">
+          <span>{currentProduct.brand}</span>
+          <span>{currentProduct.model}</span>
+          <span>${currentProduct.price}</span>
+          <form onSubmit={this.handleSubmit} className="add-to-cart">
+            <select>
+              {currentProduct.sizes.map(size => (
+                <option key={size.length}>{size.length}</option>
+              ))}
+            </select>
+            <button type="submit">Add To Cart</button>
+          </form>
         </div>
       </div>
     )
