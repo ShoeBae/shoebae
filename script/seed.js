@@ -23,9 +23,24 @@ async function seed() {
     Size.create({length: 13})
   ])
   const products = await Promise.all([
-    Product.create({model: 'Jordan 1', brand: 'Jordan', price: 180}),
-    Product.create({model: 'Yeezy 700', brand: 'Adidas', price: 300}),
-    Product.create({model: 'Jordan 5', brand: 'Jordan', price: 200})
+    Product.create({
+      model: 'Jordan 1',
+      brand: 'Jordan',
+      category: 'sneaker',
+      price: 180
+    }),
+    Product.create({
+      model: 'Yeezy 700',
+      brand: 'Adidas',
+      price: 300,
+      category: 'dress'
+    }),
+    Product.create({
+      model: 'Jordan 5',
+      brand: 'Jordan',
+      price: 200,
+      category: 'boot'
+    })
   ])
 
   const [one, two, three] = products

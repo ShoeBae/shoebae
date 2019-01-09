@@ -18,33 +18,44 @@ class AllProducts extends Component {
   }
 
   handleChange(event) {
-    this.setState({currentView: event.target.value})
+    if (event.target.value === 'all') {
+      this.setState({currentView: this.props.products})
+    }
+    this.setState({
+      currentView: this.props.products.filter(product => {
+        return product.category === event.target.value
+      })
+    })
   }
 
   render() {
-    let currentProducts = [...this.props.products]
-    if (products)
-      return (
-        <div className="productsList">
-          <form>
-            SORT{' '}
-            <select name="sortBy" onChange={this.handleChange}>
-              <option value="brand">Brand</option>
-              <option value="model">Name</option>
-              <option value="price">Price</option>
-            </select>
-          </form>
-          {this.props.products.map(product => (
-            <div key={product.id}>
-              <Link className="linkText" to={`/products/${product.id}`}>
-                <img src={product.imageUrl} /> {product.model}
-                <br />
-                {'$' + product.price}
-              </Link>
-            </div>
-          ))}
-        </div>
-      )
+    if (!this.props.products[0]) {
+      return <div>...loading</div>
+    }
+    return (
+      <div className="productsList">
+        <form>
+          {' '}
+          <select name="sortBy" onChange={this.handleChange} defaultValue="">
+            <option value="{'category':['boot', 'dress', 'sneaker']}">
+              All Categories
+            </option>
+            <option value="boot">Boots</option>
+            <option value="dress">Dress</option>
+            <option value="sneaker">Sneakers</option>
+          </select>
+        </form>
+        {this.state.currentView.map(product => (
+          <div key={product.id}>
+            <Link className="linkText" to={`/products/${product.id}`}>
+              <img src={product.imageUrl} /> {product.model}
+              <br />
+              {'$' + product.price}
+            </Link>
+          </div>
+        ))}
+      </div>
+    )
   }
 }
 
