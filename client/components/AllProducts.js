@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Navbar from './Navbar'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts, deleteProduct} from '../store/products'
