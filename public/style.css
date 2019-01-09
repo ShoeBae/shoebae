@@ -24,10 +24,10 @@ nav a {
   margin: 1em;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
-}
+} */
 
 /*****
 **  Flex Classes
@@ -36,6 +36,12 @@ form div {
 .flex-center {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.flex-apart {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -73,8 +79,20 @@ form div {
   flex-direction: column;
 }
 
-.single-product .add-to-cart > * {
+.single-product .add-to-cart button {
   height: 60px;
   margin: 5px 0px 5px 0px;
   border-radius: 0px;
+}
+
+.single-product .add-to-cart select {
+  height: 60px;
+  margin-left: 20px;
+  flex: 1;
+}
+
+.single-product .select-flag {
+  margin: 0;
+  background-color: red;
+  color: #fff;
 }

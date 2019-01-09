@@ -1,21 +1,43 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {selectProduct} from '../store/products'
+import {getToCart} from '../store/cart'
 
 class SingleProduct extends Component {
+  state = {
+    selectedSize: '',
+    mustSelect: false
+  }
+
   componentDidMount() {
     const {id} = this.props.match.params
     this.props.selectProduct(id)
   }
 
+  handleChange = event => {
+    if (event.target.value.length === 1) {
+      this.setState({
+        selectedSize: event.target.value
+      })
+    }
+  }
+
   handleSubmit = event => {
     event.preventDefault()
-    console.log('ADDED TO CART')
+    const {selectedSize} = this.state
+    const {currentProduct} = this.props
+    if (selectedSize === '') {
+      this.setState({mustSelect: true})
+    } else {
+      this.setState({
+        mustSelect: false
+      })
+      this.props.addToCart({currentProduct, selectedSize})
+    }
   }
   render() {
-    const {products: {currentProduct}} = this.props
+    const {currentProduct} = this.props
     if (!currentProduct.model) return <div>Loading...</div>
-    console.log(currentProduct.sizes.length)
     return (
       <div className="single-product">
         <div className="images">
@@ -26,12 +48,22 @@ class SingleProduct extends Component {
           <span>{currentProduct.model}</span>
           <span>${currentProduct.price}</span>
           <form onSubmit={this.handleSubmit} className="add-to-cart">
-            <select>
-              {currentProduct.sizes.map(size => (
-                <option key={size.length}>{size.length}</option>
-              ))}
-            </select>
+            <div className="flex-apart">
+              <label>Select A Size:</label>
+              <select onChange={this.handleChange}>
+                {currentProduct.sizes.map(size => size.length).map(size => {
+                  return (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
             <button type="submit">Add To Cart</button>
+            {this.state.mustSelect && (
+              <div className="select-flag">Please select a size</div>
+            )}
           </form>
         </div>
       </div>
@@ -39,11 +71,17 @@ class SingleProduct extends Component {
   }
 }
 
-const mapState = ({products, user}) => ({products, user})
+const mapState = ({products: {currentProduct}, user}) => ({
+  currentProduct,
+  user
+})
 
 const mapDispatch = dispatch => ({
   selectProduct: id => {
     dispatch(selectProduct(id))
+  },
+  addToCart: product => {
+    dispatch(getToCart(product))
   }
 })
 
