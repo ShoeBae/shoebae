@@ -13,6 +13,7 @@ class AllProducts extends Component {
   }
 
   componentDidMount() {
+    console.log('TESTING', this.props.products)
     this.props.fetchProducts()
   }
   handleChange(event) {
@@ -20,6 +21,7 @@ class AllProducts extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="productsList">
         <form>
@@ -49,15 +51,11 @@ class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.products.productsList
-  }
-}
+const mapStateToProps = ({products}) => ({products: products.productsList})
 
 const dispatchToProps = dispatch => {
   return {
-    fetchProducts: sortBy => dispatch(fetchProducts(sortBy)),
+    fetchProducts: () => dispatch(fetchProducts()),
     deleteProduct: productID => dispatch(deleteProduct(productID))
   }
 }

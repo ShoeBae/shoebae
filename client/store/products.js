@@ -17,8 +17,7 @@ const initialState = {
   productsList: [
     {
       model: 'the morgan',
-      color: 'rainbow',
-      brand: 'offwhite',
+      brand: 'morga',
       price: 120
     }
   ],
@@ -48,9 +47,9 @@ export const selectProduct = productID => async dispatch => {
   }
 }
 
-export const fetchProducts = sortBy => async dispatch => {
+export const fetchProducts = () => async dispatch => {
   try {
-    const res = await axios.get(`/api/products/${sortBy}`)
+    const res = await axios.get(`/api/products`)
     const products = res.data
     dispatch(setProducts(products))
   } catch (err) {
