@@ -4,6 +4,7 @@ module.exports = router
 
 const isAdmin = (req, res, next) => {
   if (!req.user || !req.user.isAdmin) {
+    // REVIEW: good this exists, should be used
     res.sendStatus(403)
     return next(new Error('Access Denied'))
   }
@@ -22,6 +23,7 @@ router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findAll({
       where: {
+        // REVIEW: use findById
         id: req.params.productId
       },
       include: [{model: Size, as: 'sizes'}]
@@ -34,6 +36,7 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    // REVIEW: don't pass req.body into `create` or `update` (anything really)
     const product = await Product.create(req.body)
     res.json(product)
   } catch (err) {
@@ -48,6 +51,7 @@ router.put('/:productId', async (req, res, next) => {
     await Product.update(data, {
       where: {id}
     })
+    // REVIEW: id is unique. use findOne, or findById
     const product = await Product.findAll({
       where: {
         id

@@ -18,6 +18,7 @@ const Product = db.define('product', {
     allowNull: false
   },
   category: {
+    // REVIEW: ENUM vs model/relationship
     type: Sequelize.ENUM('boot', 'dress', 'sneaker')
   },
   price: {
