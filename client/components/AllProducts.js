@@ -12,20 +12,21 @@ class AllProducts extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  componentDidMount() {
-    this.props.fetchProducts()
+  async componentDidMount() {
+    await this.props.fetchProducts()
     this.setState({currentView: this.props.products})
   }
 
   handleChange(event) {
     if (event.target.value === 'all') {
       this.setState({currentView: this.props.products})
-    }
-    this.setState({
-      currentView: this.props.products.filter(product => {
-        return product.category === event.target.value
+    } else {
+      this.setState({
+        currentView: this.props.products.filter(product => {
+          return product.category === event.target.value
+        })
       })
-    })
+    }
   }
 
   render() {
@@ -36,10 +37,8 @@ class AllProducts extends Component {
       <div className="productsList">
         <form>
           {' '}
-          <select name="sortBy" onChange={this.handleChange} defaultValue="">
-            <option value="{'category':['boot', 'dress', 'sneaker']}">
-              All Categories
-            </option>
+          <select name="sortBy" onChange={this.handleChange}>
+            <option value="all">All Categories</option>
             <option value="boot">Boots</option>
             <option value="dress">Dress</option>
             <option value="sneaker">Sneakers</option>
