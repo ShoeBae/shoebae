@@ -106,6 +106,7 @@ export default function(state = initialState, action) {
     case ADD_PRODUCT:
       return {...state, productsList: action.products}
     case REMOVE_PRODUCT:
+      // REVIEW: O(n) could we get O(1)?
       return {
         ...state,
         productsList: state.productsList.filter(
