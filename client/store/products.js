@@ -14,13 +14,7 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
  * INITIAL STATE
  */
 const initialState = {
-  productsList: [
-    {
-      model: 'the morgan',
-      brand: 'morga',
-      price: 120
-    }
-  ],
+  productsList: [],
   currentProduct: {}
   //?? isAdmin: false
 }

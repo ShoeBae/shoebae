@@ -1,13 +1,15 @@
 const router = require('express').Router()
 const {Product, Size} = require('../db/models')
+const {requireAdmin} = require('../util')
+const _ = require('lodash')
 module.exports = router
 
-const isAdmin = (req, res, next) => {
-  if (!req.user || !req.user.isAdmin) {
-    res.sendStatus(403)
-    return next(new Error('Access Denied'))
-  }
-}
+// const isAdmin = (req, res, next) => {
+//   if (!req.user || !req.user.isAdmin) {
+//     res.sendStatus(403)
+//     return next(new Error('Access Denied'))
+//   }
+// }
 
 router.get('/', async (req, res, next) => {
   try {
@@ -32,16 +34,17 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireAdmin, async (req, res, next) => {
   try {
-    const product = await Product.create(req.body)
+    const productAttributes = _.pick(req.body, Product.adminFields)
+    const product = await Product.create(productAttributes)
     res.json(product)
   } catch (err) {
     next(err)
   }
 })
 
-router.put('/:productId', async (req, res, next) => {
+router.put('/:productId', requireAdmin, async (req, res, next) => {
   try {
     const data = req.body
     const id = req.params.productId
@@ -60,7 +63,7 @@ router.put('/:productId', async (req, res, next) => {
   }
 })
 
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId', requireAdmin, async (req, res, next) => {
   try {
     await Product.destroy({
       where: {
