@@ -12,16 +12,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <Link to="/products/boots">Boots</Link>
         <Link to="/products/dress">Dress</Link>
         <Link to="/products/sneakers">Sneakers</Link>
-      {isLoggedIn ? (
-          {/* The navbar will show these links after you log in */}
+
+        {isLoggedIn ? (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
         ) : (
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-       )}
+          <React.Fragment>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </React.Fragment>
+        )}
       </div>
     </nav>
     <hr />
