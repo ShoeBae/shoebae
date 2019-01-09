@@ -36,7 +36,6 @@ class AllProducts extends Component {
     return (
       <div className="productsList">
         <form>
-          {' '}
           <select name="sortBy" onChange={this.handleChange}>
             <option value="all">All Categories</option>
             <option value="boot">Boots</option>
