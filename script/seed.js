@@ -20,29 +20,27 @@ async function seed() {
     Size.create({length: 10}),
     Size.create({length: 11}),
     Size.create({length: 12}),
-    Size.create({length: 13}),
-    Size.create({length: 14})
+    Size.create({length: 13})
   ])
   const products = await Promise.all([
-    Product.create({model: '700', brand: 'Yeezy', price: 300}),
-    Product.create({model: '1', brand: 'Jordan', price: 180}),
-    Product.create({model: '5', brand: 'Jordan', price: 200})
+    Product.create({model: 'Jordan 1', brand: 'Jordan', price: 180}),
+    Product.create({model: 'Yeezy 700', brand: 'Adidas', price: 300}),
+    Product.create({model: 'Jordan 5', brand: 'Jordan', price: 200})
   ])
 
   const [one, two, three] = products
-  const [
-    six,
-    seven,
-    eight,
-    nine,
-    ten,
-    eleven,
-    twelve,
-    thirteen,
-    fourteen
-  ] = sizes
+  const [six, seven, eight, nine, ten, eleven, twelve, thirteen] = sizes
 
-  await one.addSize(seven, {through: {quantity: 50}})
+  await one.addSize(six, {through: {quantity: 10}})
+  await one.addSize(seven, {through: {quantity: 10}})
+
+  await two.addSize(eight, {through: {quantity: 10}})
+  await two.addSize(nine, {through: {quantity: 10}})
+  await two.addSize(ten, {through: {quantity: 10}})
+  await two.addSize(eleven, {through: {quantity: 10}})
+  await two.addSize(twelve, {through: {quantity: 10}})
+  await two.addSize(thirteen, {through: {quantity: 10}})
+  await two.addSize(seven, {through: {quantity: 10}})
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
