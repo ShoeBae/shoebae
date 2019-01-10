@@ -115,3 +115,53 @@ form div {
   background-color: red;
   color: #fff;
 }
+
+/*****
+**  Cart
+*****/
+
+.cart {
+  padding: 20px;
+  background-color: magenta;
+  border: 1px solid red;
+  margin: 20px;
+}
+
+.cart .empty,
+.cart .nonempty {
+  text-align: center;
+}
+
+.cart .nonempty .header {
+  margin-bottom: 20px;
+}
+
+/*****
+**  Cart Item
+*****/
+
+.cart-item {
+  background-color: green;
+  display: flex;
+}
+
+.cart-item > * {
+  flex: 1;
+  margin: 10px;
+  background-color: orange;
+}
+
+.cart-item--info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cart-item--info > * {
+  margin: 5px;
+  flex: 1;
+}
+
+.cart-item--remove {
+  cursor: pointer;
+}
