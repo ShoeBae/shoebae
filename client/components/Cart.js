@@ -8,7 +8,6 @@ import CartItem from './CartItem'
 class Cart extends Component {
   render() {
     const {cart} = this.props
-    console.log(cart, '<<<CART')
     return (
       <div className="cart flex-center">
         {!cart[0] ? (

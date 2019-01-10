@@ -20,10 +20,7 @@ export const deleteFromCart = product => dispatch => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case REMOVE_FROM_CART:
-      return state.filter(({product}) => {
-        console.log(product, '<<PRODUCT IN STORE')
-        return product.id !== action.product.id
-      })
+      return state.filter(({product}) => product.id !== action.product.id)
     case ADD_TO_CART:
       return [...state, action.product]
     default:
