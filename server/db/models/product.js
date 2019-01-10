@@ -26,4 +26,13 @@ const Product = db.define('product', {
   }
 })
 
+Product.adminFields = [
+  'model',
+  'imageUrl',
+  'color',
+  'brand',
+  'category',
+  'price'
+]
+
 module.exports = Product

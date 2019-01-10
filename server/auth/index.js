@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const {requireLogin} = require('../util')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -32,13 +33,13 @@ router.post('/signup', async (req, res, next) => {
   }
 })
 
-router.post('/logout', (req, res) => {
+router.post('/logout', requireLogin, (req, res) => {
   req.logout()
   req.session.destroy()
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
+router.get('/me', requireLogin, (req, res) => {
   res.json(req.user)
 })
 
