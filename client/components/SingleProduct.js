@@ -29,11 +29,11 @@ class SingleProduct extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const {selectedSize} = this.state
-    const {currentProduct} = this.props
-    if (selectedSize === '') {
+    const {selectedSize, qtyAddedToCart} = this.state
+    const {currentProduct: product} = this.props
+    if (selectedSize === '' && qtyAddedToCart === 0) {
       this.setState({flag: 'Please select a size'})
-    } else if (this.state.qtyAddedToCart > 0) {
+    } else if (qtyAddedToCart > 0) {
       this.setState({
         flag: 'This product is limited to one'
       })
@@ -42,7 +42,7 @@ class SingleProduct extends Component {
         qtyAddedToCart: 1,
         flag: ''
       })
-      this.props.addToCart({currentProduct, selectedSize, quantity: 1})
+      this.props.addToCart({product, selectedSize})
     }
   }
   render() {
