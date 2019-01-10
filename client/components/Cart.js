@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import CartItem from './CartItem'
 
 // going to need a cart item component
 
 class Cart extends Component {
   render() {
     const {cart} = this.props
-    console.log(cart, '<<<CART')
     return (
-      <div className="cart">
+      <div className="cart flex-center">
         {!cart[0] ? (
           <div className="empty">
             <div>Shopping cart is empty</div>
@@ -20,11 +20,16 @@ class Cart extends Component {
           </div>
         ) : (
           <div className="nonempty">
-            <div>My Cart</div>
-            <div>You have {cart.length} item in your cart</div>
-            <div className="products">
-              {cart.map(product => <div key={product.id}>ITEM GOES HERE</div>)}
-            </div>
+            <div className="header">My Cart</div>
+            {/* <div>You have {cart.length} item in your cart</div> */}
+            <main>
+              <div className="products">
+                {cart.map(product => (
+                  <CartItem {...product} key={product.id + product.brand} />
+                ))}
+              </div>
+              <div className="summary" />
+            </main>
           </div>
         )}
       </div>
