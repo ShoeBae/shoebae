@@ -73,8 +73,16 @@ form div {
   flex-direction: column;
 }
 
-.single-product .add-to-cart > * {
+.single-product .add-to-cart button,
+.single-product .add-to-cart select {
   height: 60px;
-  margin: 5px 0px 5px 0px;
+  margin: 5px 0px 0px 0px;
   border-radius: 0px;
+}
+
+.single-product .select-flag {
+  margin: 0;
+  padding: 5px;
+  background-color: red;
+  color: #fff;
 }
