@@ -19,6 +19,10 @@ class SingleProduct extends Component {
       this.setState({
         selectedSize: event.target.value
       })
+    } else {
+      this.setState({
+        selectedSize: ''
+      })
     }
   }
 
@@ -48,18 +52,16 @@ class SingleProduct extends Component {
           <span>{currentProduct.model}</span>
           <span>${currentProduct.price}</span>
           <form onSubmit={this.handleSubmit} className="add-to-cart">
-            <div className="flex-apart">
-              <label>Select A Size:</label>
-              <select onChange={this.handleChange}>
-                {currentProduct.sizes.map(size => size.length).map(size => {
-                  return (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  )
-                })}
-              </select>
-            </div>
+            <select onChange={this.handleChange}>
+              <option>Select A Size</option>
+              {currentProduct.sizes.map(size => size.length).map(size => {
+                return (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                )
+              })}
+            </select>
             <button type="submit">Add To Cart</button>
             {this.state.mustSelect && (
               <div className="select-flag">Please select a size</div>
