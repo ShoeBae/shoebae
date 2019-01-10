@@ -47,7 +47,6 @@ class SingleProduct extends Component {
   }
   render() {
     const {currentProduct} = this.props
-    console.log(currentProduct, '<<CURRENT PRODUCT')
     if (!currentProduct.model) return <div>Loading...</div>
     return (
       <div className="single-product">

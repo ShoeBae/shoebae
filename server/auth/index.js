@@ -17,11 +17,6 @@ router.post('/login', async (req, res, next) => {
       const cart = await Cart.findOne({where: {userId: user.id}})
       //refract code below
       console.log('THIS IS A CART', cart)
-      if (cart) {
-        await Cart.update({sessionId: req.sessionID})
-      }
-      ///ERROR ABOVE, TRYING TO UPDATE EXISTING CART
-
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {

@@ -1,7 +1,39 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {deleteFromCart} from '../store/cart'
 
-const CartItem = props => {
-  return <div>This here is a sneaker</div>
+class CartItem extends Component {
+  handleClick = () => {
+    const {product: {id}, removeFromCart} = this.props
+    removeFromCart({id})
+  }
+
+  render() {
+    const {product, selectedSize} = this.props
+    return (
+      <div className="cart-item">
+        <div className="cart-item--img" />
+        <div className="cart-item--info">
+          <span>{product.brand}</span>
+          <span>{product.model}</span>
+          <span>{product.color}</span>
+          <span>Size: {selectedSize}</span>
+        </div>
+        <div className="flex-center">
+          <span className="cart-item--remove" onClick={this.handleClick}>
+            remove
+          </span>
+        </div>
+        <div className="cart-item--price flex-center">${product.price}</div>
+      </div>
+    )
+  }
 }
 
-export default CartItem
+const mapProps = dispatch => ({
+  removeFromCart: product => {
+    dispatch(deleteFromCart(product))
+  }
+})
+
+export default connect(null, mapProps)(CartItem)
