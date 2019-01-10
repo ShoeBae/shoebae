@@ -47,6 +47,7 @@ class SingleProduct extends Component {
   }
   render() {
     const {currentProduct} = this.props
+    console.log(currentProduct, '<<CURRENT PRODUCT')
     if (!currentProduct.model) return <div>Loading...</div>
     return (
       <div className="single-product">
@@ -57,22 +58,26 @@ class SingleProduct extends Component {
           <span>{currentProduct.brand}</span>
           <span>{currentProduct.model}</span>
           <span>${currentProduct.price}</span>
-          <form onSubmit={this.handleSubmit} className="add-to-cart">
-            <select onChange={this.handleChange}>
-              <option>Select A Size</option>
-              {currentProduct.sizes.map(size => size.length).map(size => {
-                return (
-                  <option key={size} value={size}>
-                    {size}
-                  </option>
-                )
-              })}
-            </select>
-            <button type="submit">Add To Cart</button>
-            {this.state.flag && (
-              <div className="select-flag">{this.state.flag}</div>
-            )}
-          </form>
+          {currentProduct.sizes[0] ? (
+            <form onSubmit={this.handleSubmit} className="add-to-cart">
+              <select onChange={this.handleChange}>
+                <option>Select A Size</option>
+                {currentProduct.sizes.map(size => size.length).map(size => {
+                  return (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  )
+                })}
+              </select>
+              <button type="submit">Add To Cart</button>
+              {this.state.flag && (
+                <div className="select-flag">{this.state.flag}</div>
+              )}
+            </form>
+          ) : (
+            <div>No sizes currently available</div>
+          )}
         </div>
       </div>
     )
