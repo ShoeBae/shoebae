@@ -6,7 +6,8 @@ import {getToCart} from '../store/cart'
 class SingleProduct extends Component {
   state = {
     selectedSize: '',
-    mustSelect: false
+    qtyAddedToCart: 0,
+    flag: ''
   }
 
   componentDidMount() {
@@ -31,12 +32,17 @@ class SingleProduct extends Component {
     const {selectedSize} = this.state
     const {currentProduct} = this.props
     if (selectedSize === '') {
-      this.setState({mustSelect: true})
+      this.setState({flag: 'Please select a size'})
+    } else if (this.state.qtyAddedToCart > 0) {
+      this.setState({
+        flag: 'This product is limited to one'
+      })
     } else {
       this.setState({
-        mustSelect: false
+        qtyAddedToCart: 1,
+        flag: ''
       })
-      this.props.addToCart({currentProduct, selectedSize})
+      this.props.addToCart({currentProduct, selectedSize, quantity: 1})
     }
   }
   render() {
@@ -63,8 +69,8 @@ class SingleProduct extends Component {
               })}
             </select>
             <button type="submit">Add To Cart</button>
-            {this.state.mustSelect && (
-              <div className="select-flag">Please select a size</div>
+            {this.state.flag && (
+              <div className="select-flag">{this.state.flag}</div>
             )}
           </form>
         </div>
