@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
@@ -13,7 +13,7 @@ const UserHome = props => {
       <h3>Welcome, {email}</h3>
 
       {props.userInfo.isAdmin ? (
-        <React.Fragment>
+        <Fragment>
           <div>ADD ADMIN INFO HERE</div>
           <br />
 
@@ -24,10 +24,10 @@ const UserHome = props => {
           <h4>ORDER HISTORY</h4>
           <ul href="# ">SHOEBAE CLIENTS </ul>
           <ul href="#">GUESTS</ul>
-        </React.Fragment>
+        </Fragment>
       ) : (
         <div>
-          <React.Fragment>
+          <Fragment>
             <h4>ACCOUNT DETAILS</h4>
             <ul href="# ">{email}</ul>
             <ul href="#">password</ul>
@@ -37,15 +37,15 @@ const UserHome = props => {
             {props.userInfo.orders ? (
               props.userInfo.orders.map(order => {
                 return (
-                  <React.Fragment key={order.id}>
+                  <Fragment key={order.id}>
                     <ul>{order.id}</ul>
-                  </React.Fragment>
+                  </Fragment>
                 )
               })
             ) : (
               <span>~*NO ORDER HISTORY*~</span>
             )}
-          </React.Fragment>
+          </Fragment>
         </div>
       )}
     </div>
