@@ -12,6 +12,7 @@ class UserHome extends Component {
 
   render() {
     const {email, userId} = this.props
+    console.log(this.props.orders)
 
     return (
       <div>
@@ -39,9 +40,20 @@ class UserHome extends Component {
               <button type="button">update account</button>
               <br />
               <h4>ORDER HISTORY</h4>
-              <ul href="# ">map over client history </ul>
+              {this.props.userInfo.orders ? (
+                this.props.userInfo.orders.map(order => {
+                  return (
+                    <React.Fragment key={order.id}>
+                      <ul>
+                        {order.id} {order.price}
+                      </ul>
+                    </React.Fragment>
+                  )
+                })
+              ) : (
+                <span>~*NO ORDER HISTORY*~</span>
+              )}
             </React.Fragment>
-            <div>NO ADMIN ACCESS TEST</div>
           </div>
         )}
       </div>
