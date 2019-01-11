@@ -165,3 +165,13 @@ form div {
 .cart-item--remove {
   cursor: pointer;
 }
+
+/** ALL PRODUCTS **/
+.productsList {
+  margin-left: 20px;
+  margin-right: 50px;
+}
+.productFilter {
+  display: inline;
+  align-content: right;
+}
