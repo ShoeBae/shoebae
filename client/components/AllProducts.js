@@ -34,7 +34,8 @@ const styles = theme => ({
     flexDirection: 'column'
   },
   cardMedia: {
-    paddingTop: '56.25%' // 16:9
+    paddingTop: '56.25%', // 16:9
+    backgroundSize: 'contain'
   },
   cardContent: {
     flexGrow: 1,
@@ -92,7 +93,7 @@ class AllProducts extends Component {
                     <Link
                       to={`/products/${product.id}`}
                       onClick={() => {
-                        this.props.fetchProduct(product.id)
+                        this.props.selectProduct(product.id)
                       }}
                     >
                       <CardMedia

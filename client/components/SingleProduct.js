@@ -51,7 +51,7 @@ class SingleProduct extends Component {
     return (
       <div className="single-product">
         <div className="images">
-          <img src={`/${currentProduct.imageUrl}`} />
+          <img src={currentProduct.imageUrl} />
         </div>
         <div className="content">
           <span>{currentProduct.brand}</span>

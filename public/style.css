@@ -175,3 +175,7 @@ form div {
   display: inline;
   align-content: right;
 }
+
+.MuiCardMedia-root-131 {
+  background-size: contain;
+}
