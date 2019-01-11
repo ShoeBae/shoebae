@@ -58,7 +58,8 @@ const UserHome = props => {
 const mapState = state => {
   return {
     userId: state.user.id,
-    userInfo: state.user
+    userInfo: state.user,
+    email: state.user.email
   }
 }
 
