@@ -18,7 +18,7 @@ class UserHome extends Component {
     } else {
       return (
         <div>
-          <h3>Welcome, {email}</h3>
+          <h3>Welcome, USERNAMEWANTEMAIL</h3>
 
           {this.props.userInfo.isAdmin ? (
             <React.Fragment>
