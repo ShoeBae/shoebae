@@ -12,11 +12,10 @@ class UserHome extends Component {
 
   render() {
     const {email, userId} = this.props
-    console.log(this.props.orders)
 
     return (
       <div>
-        <h3>Welcome, USERNAMEWANTEMAIL</h3>
+        <h3>Welcome, {email}</h3>
 
         {this.props.userInfo.isAdmin ? (
           <React.Fragment>
