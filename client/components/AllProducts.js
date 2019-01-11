@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
 import classNames from 'classnames'
-import {fetchProducts, deleteProduct} from '../store/products'
+import {fetchProducts, deleteProduct, selectProduct} from '../store/products'
 
 const styles = theme => ({
   layout: {
@@ -136,7 +136,8 @@ const mapStateToProps = ({products}) => ({products: products.productsList})
 const dispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
-    deleteProduct: productID => dispatch(deleteProduct(productID))
+    deleteProduct: productID => dispatch(deleteProduct(productID)),
+    selectProduct: productID => dispatch(selectProduct(productID))
   }
 }
 
