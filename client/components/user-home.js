@@ -66,7 +66,6 @@ class UserHome extends Component {
  */
 const mapState = state => {
   return {
-    email: state.user.email,
     userId: state.user.id,
     userInfo: state.user
   }
