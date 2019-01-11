@@ -48,6 +48,30 @@ async function seed() {
       brand: 'Saint Laurent',
       category: 'boot',
       price: 1145
+    }),
+    Product.create({
+      model: 'Continental 80',
+      imageUrl: '/assets/shoes/adidas-continental80-70.jpg',
+      color: 'pink',
+      brand: 'Adidas',
+      category: 'sneaker',
+      price: 70
+    }),
+    Product.create({
+      model: 'Gazelle Superstar',
+      imageUrl: '/assets/shoes/adidas-gazellesuperstar-65.jpg',
+      color: 'blue',
+      brand: 'Adidas',
+      category: 'sneaker',
+      price: 65
+    }),
+    Product.create({
+      model: 'Stan Smith',
+      imageUrl: '/assets/shoes/adidas-stansmith-105.jpg',
+      color: 'white',
+      brand: 'Adidas',
+      category: 'sneaker',
+      price: 1145
     })
   ])
 
