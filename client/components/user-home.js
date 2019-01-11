@@ -5,59 +5,53 @@ import {connect} from 'react-redux'
 /**
  * COMPONENT
  */
-class UserHome extends Component {
-  constructor(props) {
-    super()
-  }
+const UserHome = props => {
+  const {email, userId} = props
 
-  render() {
-    const {email, userId} = this.props
+  return (
+    <div>
+      <h3>Welcome, {email}</h3>
 
-    return (
-      <div>
-        <h3>Welcome, {email}</h3>
+      {props.userInfo.isAdmin ? (
+        <React.Fragment>
+          <div>ADD ADMIN INFO HERE</div>
+          <br />
 
-        {this.props.userInfo.isAdmin ? (
+          <h4>ACTIVE CARTS</h4>
+          <ul href="# ">SHOEBAE CLIENTS </ul>
+          <ul href="#">GUESTS</ul>
+          <br />
+          <h4>ORDER HISTORY</h4>
+          <ul href="# ">SHOEBAE CLIENTS </ul>
+          <ul href="#">GUESTS</ul>
+        </React.Fragment>
+      ) : (
+        <div>
           <React.Fragment>
-            <div>ADD ADMIN INFO HERE</div>
-            <br />
-
-            <h4>ACTIVE CARTS</h4>
-            <ul href="# ">SHOEBAE CLIENTS </ul>
-            <ul href="#">GUESTS</ul>
+            <h4>ACCOUNT DETAILS</h4>
+            <ul href="# ">{email}</ul>
+            <ul href="#">password</ul>
+            <button type="button">update account</button>
             <br />
             <h4>ORDER HISTORY</h4>
-            <ul href="# ">SHOEBAE CLIENTS </ul>
-            <ul href="#">GUESTS</ul>
+            {props.userInfo.orders ? (
+              props.userInfo.orders.map(order => {
+                return (
+                  <React.Fragment key={order.id}>
+                    <ul>
+                      {order.id} {order.price}
+                    </ul>
+                  </React.Fragment>
+                )
+              })
+            ) : (
+              <span>~*NO ORDER HISTORY*~</span>
+            )}
           </React.Fragment>
-        ) : (
-          <div>
-            <React.Fragment>
-              <h4>ACCOUNT DETAILS</h4>
-              <ul href="# ">{email}</ul>
-              <ul href="#">password</ul>
-              <button type="button">update account</button>
-              <br />
-              <h4>ORDER HISTORY</h4>
-              {this.props.userInfo.orders ? (
-                this.props.userInfo.orders.map(order => {
-                  return (
-                    <React.Fragment key={order.id}>
-                      <ul>
-                        {order.id} {order.price}
-                      </ul>
-                    </React.Fragment>
-                  )
-                })
-              ) : (
-                <span>~*NO ORDER HISTORY*~</span>
-              )}
-            </React.Fragment>
-          </div>
-        )}
-      </div>
-    )
-  }
+        </div>
+      )}
+    </div>
+  )
 }
 
 /**
