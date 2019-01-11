@@ -11,9 +11,12 @@ const Navbar = ({handleClick, isLoggedIn, cartCount}) => (
     </Link>
     <div className="navbar-links">
       {isLoggedIn ? (
-        <a href="#" onClick={handleClick}>
-          Logout
-        </a>
+        <React.Fragment>
+          <Link to="/account">Account</Link>
+          <a href="#" onClick={handleClick}>
+            Logout
+          </a>
+        </React.Fragment>
       ) : (
         <React.Fragment>
           <Link to="/login">Login</Link>
