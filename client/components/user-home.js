@@ -38,9 +38,7 @@ const UserHome = props => {
               props.userInfo.orders.map(order => {
                 return (
                   <React.Fragment key={order.id}>
-                    <ul>
-                      {order.id} {order.price}
-                    </ul>
+                    <ul>{order.id}</ul>
                   </React.Fragment>
                 )
               })
