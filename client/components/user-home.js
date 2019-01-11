@@ -7,17 +7,23 @@ import {connect} from 'react-redux'
  */
 export const UserHome = props => {
   const {email, userId} = props
-  console.log('USER INFO', props.userInfo)
+  console.log('USER IS ADMIN?', props.userInfo.isAdmin)
 
   return (
     <div>
       <h3>Welcome, {email}</h3>
       <h2>ORDER HISTORY</h2>
       <a>Account Settings - MAKE THIS ACTIVELY SHOW DETAILS ON CLICK</a>
-
       <div>{props.userInfo.email}</div>
       <div>{props.userInfo.email}</div>
       <button type="button">update account</button>
+      {props.userInfo.isAdmin ? (
+        <div>ADD ADMIN INFO HERE</div>
+      ) : (
+        <div>
+          <div>NO ADMIN ACCESS TEST</div>
+        </div>
+      )}
     </div>
   )
 }
