@@ -5,6 +5,7 @@ const Size = require('./size')
 const ProductSize = require('./productsize')
 const Cart = require('./cart')
 const CartItem = require('./cartitem')
+const Order = require('./order')
 
 Review.belongsTo(Product)
 Product.hasMany(Review)
@@ -14,6 +15,9 @@ Size.belongsToMany(Product, {through: ProductSize})
 
 Cart.belongsToMany(Product, {through: CartItem})
 Product.belongsToMany(Cart, {through: CartItem})
+
+Order.belongsTo(User)
+User.hasMany(Order)
 
 /**
  * If we had any associations to make, this would be a great place to put them!
