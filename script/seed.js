@@ -23,24 +23,31 @@ async function seed() {
     Size.create({length: 12}),
     Size.create({length: 13})
   ])
+
   const products = await Promise.all([
     Product.create({
-      model: 'Jordan 1',
-      brand: 'Jordan',
+      model: 'Jordan 1 Retro Hi Top',
+      imageUrl: '/assets/shoes/nike-airjordan1retrohitop-145.jpg',
+      color: 'blue',
+      brand: 'Nike',
       category: 'sneaker',
-      price: 180
+      price: 145
     }),
     Product.create({
-      model: 'Yeezy 700',
-      brand: 'Adidas',
-      price: 300,
-      category: 'dress'
+      model: 'Garavani Rockstud Booties',
+      imageUrl: '/assets/shoes/valentino-garavanirockstudbooties-1125.jpg',
+      color: 'blue',
+      brand: 'Valentino',
+      category: 'dress',
+      price: 1125
     }),
     Product.create({
-      model: 'Jordan 5',
-      brand: 'Jordan',
-      price: 200,
-      category: 'boot'
+      model: 'Wyatt 40 Harnness Boots',
+      imageUrl: '/assets/shoes/wyatt40harnessboots-saintlaurent-1145.jpg',
+      color: 'black',
+      brand: 'Saint Laurent',
+      category: 'boot',
+      price: 1145
     })
   ])
 
