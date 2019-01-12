@@ -8,6 +8,7 @@ async function seed() {
   console.log('db synced!')
 
   const users = await Promise.all([
+    User.create({email: 'admin', password: '123', isAdmin: 'true'}),
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
   ])
@@ -22,24 +23,55 @@ async function seed() {
     Size.create({length: 12}),
     Size.create({length: 13})
   ])
+
   const products = await Promise.all([
     Product.create({
-      model: 'Jordan 1',
-      brand: 'Jordan',
+      model: 'Jordan 1 Retro Hi Top',
+      imageUrl: '/assets/shoes/nike-airjordan1retrohitop-145.jpg',
+      color: 'blue',
+      brand: 'Nike',
       category: 'sneaker',
-      price: 180
+      price: 145
     }),
     Product.create({
-      model: 'Yeezy 700',
+      model: 'Garavani Rockstud Booties',
+      imageUrl: '/assets/shoes/valentino-garavanirockstudbooties-1125.jpg',
+      color: 'blue',
+      brand: 'Valentino',
+      category: 'dress',
+      price: 1125
+    }),
+    Product.create({
+      model: 'Wyatt 40 Harnness Boots',
+      imageUrl: '/assets/shoes/wyatt40harnessboots-saintlaurent-1145.jpg',
+      color: 'black',
+      brand: 'Saint Laurent',
+      category: 'boot',
+      price: 1145
+    }),
+    Product.create({
+      model: 'Continental 80',
+      imageUrl: '/assets/shoes/adidas-continental80-70.jpg',
+      color: 'pink',
       brand: 'Adidas',
-      price: 300,
-      category: 'dress'
+      category: 'sneaker',
+      price: 70
     }),
     Product.create({
-      model: 'Jordan 5',
-      brand: 'Jordan',
-      price: 200,
-      category: 'boot'
+      model: 'Gazelle Superstar',
+      imageUrl: '/assets/shoes/adidas-gazellesuperstar-65.jpg',
+      color: 'blue',
+      brand: 'Adidas',
+      category: 'sneaker',
+      price: 65
+    }),
+    Product.create({
+      model: 'Stan Smith',
+      imageUrl: '/assets/shoes/adidas-stansmith-105.jpg',
+      color: 'white',
+      brand: 'Adidas',
+      category: 'sneaker',
+      price: 1145
     })
   ])
 
