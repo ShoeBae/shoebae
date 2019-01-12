@@ -10,6 +10,8 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const cookieParser = require('cookie-parser')
+const {Cart} = require('./db/models')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -34,6 +36,7 @@ passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await db.models.user.findById(id)
+    user.pizza = true
     done(null, user)
   } catch (err) {
     done(err)
@@ -63,9 +66,25 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+  app.use(cookieParser())
+
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+
+  app.use('*', async (req, res, next) => {
+    if (!req.user) {
+      if (!req.cookies.cartId) {
+        try {
+          let {id} = await Cart.create({})
+          res.cookie('cartId', `${id}`, {maxAge: 900000000})
+        } catch (err) {
+          next(err)
+        }
+      }
+    }
+    next()
+  })
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -82,7 +101,7 @@ const createApp = () => {
   })
 
   // sends index.html
-  app.use('*', (req, res) => {
+  app.use('*', (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', 'public/index.html'))
   })
 

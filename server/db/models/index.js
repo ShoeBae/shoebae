@@ -12,8 +12,12 @@ Product.hasMany(Review)
 Product.belongsToMany(Size, {through: ProductSize})
 Size.belongsToMany(Product, {through: ProductSize})
 
-Cart.belongsToMany(Product, {through: CartItem})
-Product.belongsToMany(Cart, {through: CartItem})
+User.hasOne(Cart)
+
+CartItem.belongsTo(Cart)
+CartItem.belongsTo(Product)
+
+Cart.hasMany(CartItem)
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -34,6 +38,6 @@ module.exports = {
   Review,
   Size,
   ProductSize,
-  CartItem
-  // Cart
+  CartItem,
+  Cart
 }
