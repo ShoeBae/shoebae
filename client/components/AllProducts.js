@@ -46,7 +46,8 @@ class AllProducts extends Component {
   constructor() {
     super()
     this.state = {
-      currentView: []
+      currentView: [],
+      selectedProduct: {}
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -115,9 +116,13 @@ class AllProducts extends Component {
                       <Button size="small" color="primary">
                         Add to Cart
                       </Button>
-                      <Button size="small" color="primary">
-                        Edit
-                      </Button>
+                      {this.props.user.isAdmin ? (
+                        <Button size="small" color="primary">
+                          <Link to="/account">Edit</Link>
+                        </Button>
+                      ) : (
+                        <div />
+                      )}
                     </CardActions>
                   </Card>
                 </Grid>
@@ -130,7 +135,10 @@ class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = ({products}) => ({products: products.productsList})
+const mapStateToProps = ({products, user}) => ({
+  products: products.productsList,
+  user
+})
 
 const dispatchToProps = dispatch => {
   return {
