@@ -186,6 +186,22 @@ async function seed() {
       price: 350
     }),
     Product.create({
+      model: 'Merton Loafers',
+      imageUrl: '/assets/shoes/poloralphlauren-mertonloafers-157.jpg',
+      color: 'brown',
+      brand: 'Polo Ralph Lauren',
+      category: 'dress',
+      price: 157
+    }),
+    Product.create({
+      model: 'Pointed Toe 65 Mary Jane Pumps',
+      imageUrl: '/assets/shoes/prada-pointedtoe65maryjanepumps-450.jpg',
+      color: 'orange',
+      brand: 'Prada',
+      category: 'dress',
+      price: 450
+    }),
+    Product.create({
       model: 'Wyatt 40 Harnness Boots',
       imageUrl: '/assets/shoes/wyatt40harnessboots-saintlaurent-1145.jpg',
       color: 'black',
@@ -194,12 +210,92 @@ async function seed() {
       price: 1145
     }),
     Product.create({
+      model: 'Chelsea Boots',
+      imageUrl: '/assets/shoes/stutterheim-chelseaboots-125.jpg',
+      color: 'green',
+      brand: 'Stutterheim',
+      category: 'boot',
+      price: 125
+    }),
+    Product.create({
+      model: 'Classic Tall Ankle Boots',
+      imageUrl: '/assets/shoes/timberland-brownboots-295.jpg',
+      color: 'brown',
+      brand: 'Timberland',
+      category: 'boot',
+      price: 295
+    }),
+    Product.create({
+      model: 'Courmayeur Valley Ankle Boots',
+      imageUrl: '/assets/shoes/timberland-courmayeurvalleyankleboots-220.jpg',
+      color: 'pink',
+      brand: 'Timberland',
+      category: 'boot',
+      price: 220
+    }),
+    Product.create({
+      model: 'Gommino Driving Shoes',
+      imageUrl: '/assets/shoes/tods-gomminodrivingshoes-178.jpg',
+      color: 'red',
+      brand: "Tod's",
+      category: 'dress',
+      price: 178
+    }),
+    Product.create({
       model: 'Garavani Rockstud Booties',
       imageUrl: '/assets/shoes/valentino-garavanirockstudbooties-1125.jpg',
       color: 'blue',
       brand: 'Valentino',
       category: 'dress',
       price: 1125
+    }),
+    Product.create({
+      model: 'Authentic Sneakers',
+      imageUrl: '/assets/shoes/vans-authenticsneakers-50.jpg',
+      color: 'black',
+      brand: 'Vans',
+      category: 'sneaker',
+      price: 50
+    }),
+    Product.create({
+      model: 'Slip-On Pro',
+      imageUrl: '/assets/shoes/vans-sliponpro-69.jpg',
+      color: 'green',
+      brand: 'Vans',
+      category: 'sneaker',
+      price: 69
+    }),
+    Product.create({
+      model: 'Classic Checkerboard',
+      imageUrl: '/assets/shoes/vanspinkcheckerboardvans-45.jpg',
+      color: 'pink',
+      brand: 'Vans',
+      category: 'sneaker',
+      price: 45
+    }),
+    Product.create({
+      model: 'YEEZY Boost 350 V2 FROZEN YELLOW',
+      imageUrl: '/assets/shoes/yeezy-boost350v2-yellow-220.jpg',
+      color: 'yellow',
+      brand: 'Yeezy',
+      category: 'sneaker',
+      price: 220
+    }),
+    Product.create({
+      model: 'YEEZY Boost 350 V2 STATIC',
+      imageUrl: '/assets/shoes/yeezy-boost350v2static-270.jpg',
+      color: 'white',
+      brand: 'Yeezy',
+      category: 'sneaker',
+      price: 270
+    }),
+    Product.create({
+      model: 'YEEZY S6 BOOTS DESERT RAT',
+      imageUrl: '/assets/shoes/yeezy-S6desertratboots-180.jpg',
+      color: 'brown',
+      brand: 'Yeezy',
+      category: 'boot',
+      price: 180
     })
   ])
 
