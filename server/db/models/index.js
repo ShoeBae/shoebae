@@ -19,6 +19,9 @@ Product.belongsToMany(Cart, {through: CartItem})
 Order.belongsTo(User)
 User.hasMany(Order)
 
+Order.belongsToMany(Product, {through: 'OrderItem'})
+Product.belongsToMany(Order, {through: 'OrderItem'})
+
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
