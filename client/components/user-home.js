@@ -8,7 +8,8 @@ import {fetchOrders} from '../store/order'
  */
 class UserHome extends Component {
   async componentDidMount() {
-    await this.props.fetchAllOrders(this.props.userId)
+    const testOrders = await this.props.fetchAllOrders(this.props.userId)
+    console.log('TESTING FETCH ORDERS', testOrders)
   }
   render() {
     const {email, userId, orders} = this.props
@@ -42,8 +43,8 @@ class UserHome extends Component {
               {orders ? (
                 orders.map(order => {
                   return (
-                    <Fragment key={order.id++}>
-                      <ul>{order.id}</ul>
+                    <Fragment key={order.orderId++}>
+                      <ul>{order.orderId}</ul>
                       <ul>PRODUCT INFORMATION</ul>
                     </Fragment>
                   )
