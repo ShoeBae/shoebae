@@ -24,7 +24,7 @@ const updateOrder = orderId => ({type: UPDATE_ORDER, orderId})
  */
 export const fetchOrders = () => async dispatch => {
   try {
-    const res = await axios.get('/orders')
+    const res = await axios.get(`/api/orders`)
     const orders = res.data
     return dispatch(getOrders(orders))
   } catch (err) {
