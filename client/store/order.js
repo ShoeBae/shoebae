@@ -4,7 +4,7 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_ORDERS = 'GET_ORDER'
+const SET_ORDERS = 'SET_ORDERS'
 
 const UPDATE_ORDER = 'UPDATE_ORDER'
 
@@ -16,7 +16,7 @@ const defaultOrder = []
 /**
  * ACTION CREATORS
  */
-const getOrders = orders => ({type: GET_ORDERS, orders})
+const setOrders = orders => ({type: SET_ORDERS, orders})
 const updateOrder = orderId => ({type: UPDATE_ORDER, orderId})
 
 /**
@@ -26,7 +26,7 @@ export const fetchOrders = () => async dispatch => {
   try {
     const res = await axios.get(`/api/orders`)
     const orders = res.data
-    return dispatch(getOrders(orders))
+    return dispatch(setOrders(orders))
   } catch (err) {
     console.error(err)
   }
@@ -37,8 +37,8 @@ export const fetchOrders = () => async dispatch => {
  */
 export default function(state = defaultOrder, action) {
   switch (action.type) {
-    case GET_ORDERS:
-      return [...state, action.orders]
+    case SET_ORDERS:
+      return action.orders
 
     default:
       return state

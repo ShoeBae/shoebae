@@ -7,9 +7,15 @@ import {fetchOrders} from '../store/order'
  * COMPONENT
  */
 class UserHome extends Component {
+  constructor() {
+    super()
+    this.state = {
+      allOrders: []
+    }
+  }
   async componentDidMount() {
-    const testOrders = await this.props.fetchAllOrders(this.props.userId)
-    console.log('TESTING FETCH ORDERS', testOrders)
+    const allOrders = await this.props.fetchAllOrders()
+    this.setState(allOrders)
   }
   render() {
     const {email, userId, orders} = this.props
@@ -22,12 +28,12 @@ class UserHome extends Component {
           <Fragment>
             <div>ADD ADMIN INFO HERE</div>
             <br />
-
             <h4>ACTIVE CARTS</h4>
             <ul href="# ">SHOEBAE CLIENTS </ul>
             <ul href="#">GUESTS</ul>
             <br />
             <h4>ORDER HISTORY</h4>
+
             <ul href="# ">SHOEBAE CLIENTS </ul>
             <ul href="#">GUESTS</ul>
           </Fragment>
@@ -40,18 +46,27 @@ class UserHome extends Component {
               <button type="button">update account</button>
               <br />
               <h4>ORDER HISTORY</h4>
-              {orders ? (
-                orders.map(order => {
-                  return (
-                    <Fragment key={order.orderId++}>
-                      <ul>{order.orderId}</ul>
-                      <ul>PRODUCT INFORMATION</ul>
-                    </Fragment>
-                  )
-                })
-              ) : (
-                <span>~*NO ORDER HISTORY*~</span>
-              )}
+              <table>
+                <tr>
+                  <td>ORDER ID</td>
+                  <td>STATUS</td>
+                  <td>PRODUCT</td>
+                  <td>PRICE</td>
+                </tr>
+
+                {orders ? (
+                  orders.filter(order => order.userId === userId).map(order => {
+                    return (
+                      <tr key={order.id}>
+                        <td>{order.id}</td>
+                        <td>{order.status}</td>
+                      </tr>
+                    )
+                  })
+                ) : (
+                  <span>~*NO ORDER HISTORY*~</span>
+                )}
+              </table>
             </Fragment>
           </div>
         )}
