@@ -116,7 +116,7 @@ class AllProducts extends Component {
                     <CardActions>
                       {this.props.user.isAdmin ? (
                         <Button size="small" color="primary">
-                          <Link to="/account">Edit</Link>
+                          <Link to="/admin/edit">Edit</Link>
                         </Button>
                       ) : (
                         <div />
