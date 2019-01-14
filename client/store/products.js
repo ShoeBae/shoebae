@@ -54,7 +54,7 @@ export const postProduct = newProduct => async dispatch => {
   try {
     const res = await axios.post('/api/products', newProduct)
     const product = res.data
-    dispatch(addProduct(product))
+    dispatch(setProducts(product))
   } catch (err) {
     console.log(err)
   }
@@ -97,7 +97,7 @@ export default function(state = initialState, action) {
         )
       }
     case ADD_PRODUCT:
-      return {...state, productsList: action.products}
+      return {...state, productsList: [...state.productList, action.product]}
     case REMOVE_PRODUCT:
       return {
         ...state,

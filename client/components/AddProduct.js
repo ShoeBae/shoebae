@@ -38,9 +38,10 @@ class AddProduct extends Component {
     console.log(this.state)
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
-    this.props.postProduct(this.state)
+    await this.props.postProduct(this.state)
+    this.props.history.push('/admin')
   }
 
   render() {
