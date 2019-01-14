@@ -4,19 +4,28 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store/user'
 
-const Navbar = ({handleClick, isLoggedIn, cartCount}) => (
+const Navbar = ({handleClick, isLoggedIn, cartCount, isAdmin}) => (
   <div className="navbar flex-center">
     <Link className="navbar-logo" to="/products">
       SHOEBAE
     </Link>
     <div className="navbar-links">
       {isLoggedIn ? (
-        <React.Fragment>
-          <Link to="/account">Account</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </React.Fragment>
+        isAdmin ? (
+          <React.Fragment>
+            <Link to="/admin">Account</Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <Link to="/account">Account</Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </React.Fragment>
+        )
       ) : (
         <React.Fragment>
           <Link to="/login">Login</Link>
@@ -34,7 +43,8 @@ const Navbar = ({handleClick, isLoggedIn, cartCount}) => (
 const mapState = state => {
   return {
     cartCount: state.cart.length,
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 
