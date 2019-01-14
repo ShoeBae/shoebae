@@ -29,6 +29,23 @@ async function seed() {
     Size.create({length: 13})
   ])
 
+  const orders = await Promise.all([
+    Order.create({
+      quantity: 1,
+      status: 'completed',
+      totalPrice: 350,
+      userId: 1
+    }),
+    Order.create({quantity: 1, status: 'created', totalPrice: 125, userId: 1}),
+    Order.create({
+      quantity: 1,
+      status: 'completed',
+      totalPrice: 750,
+      userId: 2
+    }),
+    Order.create({quantity: 1, status: 'processing', totalPrice: 75, userId: 3})
+  ])
+
   const products = await Promise.all([
     Product.create({
       model: 'Continental 80',
@@ -272,7 +289,7 @@ async function seed() {
     }),
     Product.create({
       model: 'Classic Checkerboard',
-      imageUrl: '/assets/shoes/vanspinkcheckerboardvans-45.jpg',
+      imageUrl: '/assets/shoes/pinkcheckerboardvans-45.jpg',
       color: 'pink',
       brand: 'Vans',
       category: 'sneaker',

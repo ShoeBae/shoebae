@@ -8,11 +8,14 @@ import {
   UserHome,
   SingleProduct,
   Cart,
-  UserAccountForm
+  UserAccountForm,
+  AdminHome
 } from './components'
 import {me} from './store'
 import {fetchCart} from './store/cart'
 import AllProducts from './components/AllProducts'
+import productForm from './components/productForm'
+import AddProduct from './components/AddProduct'
 
 /**
  * COMPONENT
@@ -36,11 +39,15 @@ class Routes extends Component {
         <Route exact path="/useraccountform" component={UserAccountForm} />
 
         <Route exact path="/products" component={AllProducts} />
-
+        <Route exact path="/admin" component={AdminHome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
+
+        {/* move below route later */}
+        <Route path="/admin/add" component={AddProduct} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
