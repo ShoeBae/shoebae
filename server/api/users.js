@@ -16,3 +16,18 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.update(
+      {
+        email: req.body.email,
+        password: req.body.password
+      },
+      {where: {id: req.params.id}}
+    )
+    res.json(user)
+  } catch (error) {
+    next(error)
+  }
+})
