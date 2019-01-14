@@ -1,12 +1,26 @@
 const router = require('express').Router()
-const {Order, Product} = require('../db/models')
+const {Order, Product, User} = require('../db/models')
+const {isAdmin} = require('../util')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  try {
-    const orders = await Order.findAll({include: [{model: Product}]})
-    res.json(orders)
-  } catch (error) {
-    next(error)
+  if (isAdmin) {
+    try {
+      const orders = await Order.findAll({
+        include: [{model: Product}, {model: User}]
+      })
+      res.json(orders)
+    } catch (error) {
+      next(error)
+    }
+  } else {
+    try {
+      const orders = await Order.findAll({
+        include: [{model: Product}]
+      })
+      res.json(orders)
+    } catch (error) {
+      next(error)
+    }
   }
 })

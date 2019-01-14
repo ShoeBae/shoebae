@@ -39,7 +39,7 @@ class AdminHome extends Component {
                 <tr key={order.id}>
                   <td>{order.id}</td>
                   <td>{order.status}</td>
-                  <td>{order.product.model}</td>
+                  <td>PRODUCT DETAILS</td>
                   <td>{order.totalPrice}</td>
                 </tr>
               )
