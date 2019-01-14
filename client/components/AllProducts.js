@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
 import classNames from 'classnames'
-import {fetchProducts, deleteProduct} from '../store/products'
+import {fetchProducts, deleteProduct, selectProduct} from '../store/products'
 
 const styles = theme => ({
   layout: {
@@ -34,7 +34,8 @@ const styles = theme => ({
     flexDirection: 'column'
   },
   cardMedia: {
-    paddingTop: '56.25%' // 16:9
+    paddingTop: '56.25%', // 16:9
+    backgroundSize: 'contain'
   },
   cardContent: {
     flexGrow: 1,
@@ -93,7 +94,7 @@ class AllProducts extends Component {
                     <Link
                       to={`/products/${product.id}`}
                       onClick={() => {
-                        this.props.fetchProduct(product.id)
+                        this.props.selectProduct(product.id)
                       }}
                     >
                       <CardMedia
@@ -143,7 +144,8 @@ const mapStateToProps = ({products, user}) => ({
 const dispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
-    deleteProduct: productID => dispatch(deleteProduct(productID))
+    deleteProduct: productID => dispatch(deleteProduct(productID)),
+    selectProduct: productID => dispatch(selectProduct(productID))
   }
 }
 
