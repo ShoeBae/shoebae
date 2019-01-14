@@ -9,9 +9,14 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({email: 'admin', password: '123', isAdmin: 'true'}),
-    User.create({email: 'cody@email.com', password: '123'}, {include: Cart}),
-    User.create({email: 'murphy@email.com', password: '123'}, {include: Cart})
+    User.create({email: 'cody@email.com', password: '123'}),
+    User.create({email: 'murphy@email.com', password: '123'})
   ])
+
+  const [admin, userOne, userTwo] = users
+
+  await userOne.createCart()
+  await userTwo.createCart()
 
   const sizes = await Promise.all([
     Size.create({length: 6}),
@@ -149,7 +154,7 @@ async function seed() {
       model: 'OFF-WHITE x Nike Blazer Mid',
       imageUrl: '/assets/shoes/offwhite-2160-nikeblazermid.jpg',
       color: 'white',
-      brand: 'Off White',
+      brand: 'Nike',
       category: 'sneaker',
       price: 2160
     }),
@@ -157,7 +162,7 @@ async function seed() {
       model: 'OFF-WHITE x Nike Air Vapormax Flyknit',
       imageUrl: '/assets/shoes/offwhite-airvapormaxflyknit-250.jpg',
       color: 'white',
-      brand: 'Off White',
+      brand: 'Nike',
       category: 'sneaker',
       price: 250
     }),
@@ -165,7 +170,7 @@ async function seed() {
       model: 'OFF-WHITE x Converse Chuck 70 Hi Top',
       imageUrl: '/assets/shoes/offwhite-chuck70hitop-1250.jpg',
       color: 'white',
-      brand: 'Off White',
+      brand: 'Nike',
       category: 'sneaker',
       price: 1250
     }),

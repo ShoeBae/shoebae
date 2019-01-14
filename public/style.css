@@ -74,7 +74,7 @@ form div {
 
 .single-product {
   display: flex;
-  background-color: aqua;
+  /* background-color: aqua; */
   margin: 10px;
 }
 
@@ -82,13 +82,14 @@ form div {
   margin: 10px;
 }
 
-.single-product .images {
+/* .single-product .images {
   flex: 2.5;
   background-color: teal;
-}
+} */
 
 .single-product .images img {
-  /** to be determined **/
+  height: 300px;
+  width: 400px;
 }
 
 .single-product .content {

@@ -14,8 +14,8 @@ Product.hasMany(Review)
 Product.belongsToMany(Size, {through: ProductSize})
 Size.belongsToMany(Product, {through: ProductSize})
 
-User.hasOne(Cart)
-Cart.belongsTo(User)
+Cart.hasOne(User)
+User.belongsTo(Cart)
 
 CartItem.belongsTo(Cart)
 CartItem.belongsTo(Product)

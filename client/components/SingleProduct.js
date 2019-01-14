@@ -61,13 +61,16 @@ class SingleProduct extends Component {
             <form onSubmit={this.handleSubmit} className="add-to-cart">
               <select onChange={this.handleChange}>
                 <option>Select A Size</option>
-                {currentProduct.sizes.map(size => size.length).map(size => {
-                  return (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  )
-                })}
+                {currentProduct.sizes
+                  .map(size => size.length)
+                  .map(size => {
+                    return (
+                      <option key={size} value={size}>
+                        {size}
+                      </option>
+                    )
+                  })
+                  .sort()}
               </select>
               <button type="submit">Add To Cart</button>
               {this.state.flag && (

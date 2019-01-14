@@ -11,6 +11,7 @@ import {
   UserAccountForm
 } from './components'
 import {me} from './store'
+import {fetchCart} from './store/cart'
 import AllProducts from './components/AllProducts'
 
 /**
@@ -19,6 +20,11 @@ import AllProducts from './components/AllProducts'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props.fetchCart()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.user !== this.props.user) this.props.fetchCart()
   }
 
   render() {
@@ -33,17 +39,16 @@ class Routes extends Component {
 
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/account" component={UserHome} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={AllProducts} />
+            <Route path="/account" component={UserHome} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route component={AllProducts} />
       </Switch>
     )
   }
@@ -56,17 +61,19 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    loadInitialData() {
-      dispatch(me())
-    }
+const mapDispatch = dispatch => ({
+  loadInitialData() {
+    dispatch(me())
+  },
+  fetchCart() {
+    dispatch(fetchCart())
   }
-}
+})
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
