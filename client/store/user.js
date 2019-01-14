@@ -6,17 +6,18 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const EDIT_USER = 'EDIT_USER'
 
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = []
 
 /**
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
-
+const editUser = user => ({type: EDIT_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -61,7 +62,7 @@ export const updateUser = (userId, updates) => async dispatch => {
   try {
     const res = await axios.put(`/api/users/${userId}`, updates)
     const user = res.data
-    dispatch(getUser(user))
+    dispatch(editUser(user))
   } catch (error) {
     console.error(error)
   }
@@ -74,6 +75,11 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
+    case EDIT_USER:
+      return state.map(
+        user => (user.id === action.user.id ? action.user : user)
+      )
+
     case REMOVE_USER:
       return defaultUser
     default:

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {updateUser} from '../store/user'
 
 class UserAccountForm extends Component {
   constructor() {
@@ -22,6 +23,7 @@ class UserAccountForm extends Component {
   handleSubmit(event) {
     event.preventDefault()
     console.log('submitted!')
+    this.props.updateAccount(this.props.user.id, this.state)
   }
 
   render() {
@@ -75,4 +77,10 @@ const mapState = state => {
     user: state.user
   }
 }
-export default connect(mapState)(UserAccountForm)
+
+const dispatchProps = dispatch => {
+  return {
+    updateAccount: (userId, updates) => dispatch(updateUser(userId, updates))
+  }
+}
+export default connect(mapState, dispatchProps)(UserAccountForm)
