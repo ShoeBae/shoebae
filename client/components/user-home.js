@@ -1,55 +1,81 @@
 import React, {Component, Fragment} from 'react'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {fetchOrders} from '../store/order'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email, userId} = props
+class UserHome extends Component {
+  constructor() {
+    super()
+    this.state = {
+      allOrders: []
+    }
+  }
+  async componentDidMount() {
+    const allOrders = await this.props.fetchAllOrders()
+    this.setState(allOrders)
+  }
+  render() {
+    const {email, userId, orders} = this.props
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
+    return (
+      <div>
+        <h3>Welcome, {email}</h3>
 
-      {props.userInfo.isAdmin ? (
-        <Fragment>
-          <div>ADD ADMIN INFO HERE</div>
-          <br />
-
-          <h4>ACTIVE CARTS</h4>
-          <ul href="# ">SHOEBAE CLIENTS </ul>
-          <ul href="#">GUESTS</ul>
-          <br />
-          <h4>ORDER HISTORY</h4>
-          <ul href="# ">SHOEBAE CLIENTS </ul>
-          <ul href="#">GUESTS</ul>
-        </Fragment>
-      ) : (
-        <div>
+        {this.props.userInfo.isAdmin ? (
           <Fragment>
-            <h4>ACCOUNT DETAILS</h4>
-            <ul href="# ">{email}</ul>
-            <ul href="#">password</ul>
-            <button type="button">update account</button>
+            <div>ADD ADMIN INFO HERE</div>
+            <br />
+            <h4>ACTIVE CARTS</h4>
+            <ul href="# ">SHOEBAE CLIENTS </ul>
+            <ul href="#">GUESTS</ul>
             <br />
             <h4>ORDER HISTORY</h4>
-            {props.userInfo.orders ? (
-              props.userInfo.orders.map(order => {
-                return (
-                  <Fragment key={order.id}>
-                    <ul>{order.id}</ul>
-                  </Fragment>
-                )
-              })
-            ) : (
-              <span>~*NO ORDER HISTORY*~</span>
-            )}
+
+            <ul href="# ">SHOEBAE CLIENTS </ul>
+            <ul href="#">GUESTS</ul>
           </Fragment>
-        </div>
-      )}
-    </div>
-  )
+        ) : (
+          <div>
+            <Fragment>
+              <h4>ACCOUNT DETAILS</h4>
+              <ul href="# ">{email}</ul>
+              <ul href="#">password</ul>
+              <button type="button">
+                <Link to="/useraccountform">update account</Link>
+              </button>
+              <br />
+              <h4>ORDER HISTORY</h4>
+              <table>
+                <tr>
+                  <td>ORDER ID</td>
+                  <td>STATUS</td>
+                  <td>PRODUCT</td>
+                  <td>PRICE</td>
+                </tr>
+
+                {orders ? (
+                  orders.filter(order => order.userId === userId).map(order => {
+                    return (
+                      <tr key={order.id}>
+                        <td>{order.id}</td>
+                        <td>{order.status}</td>
+                      </tr>
+                    )
+                  })
+                ) : (
+                  <span>~*NO ORDER HISTORY*~</span>
+                )}
+              </table>
+            </Fragment>
+          </div>
+        )}
+      </div>
+    )
+  }
 }
 
 /**
@@ -59,11 +85,17 @@ const mapState = state => {
   return {
     userId: state.user.id,
     userInfo: state.user,
-    email: state.user.email
+    email: state.user.email,
+    orders: state.orders
   }
 }
 
-export default connect(mapState)(UserHome)
+const dispatchProps = dispatch => {
+  return {
+    fetchAllOrders: () => dispatch(fetchOrders())
+  }
+}
+export default connect(mapState, dispatchProps)(UserHome)
 
 /**
  * PROP TYPES

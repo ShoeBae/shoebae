@@ -30,6 +30,7 @@ class Routes extends Component {
         <Route exact path="/useraccountform" component={UserAccountForm} />
 
         <Route exact path="/products" component={AllProducts} />
+
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/account" component={UserHome} />
