@@ -24,55 +24,39 @@ class UserHome extends Component {
     return (
       <div>
         <h3>Welcome, {email}</h3>
-
-        {this.props.userInfo.isAdmin ? (
+        <div>
           <Fragment>
-            <div>ADD ADMIN INFO HERE</div>
-            <br />
-            <h4>ACTIVE CARTS</h4>
-            <ul href="# ">SHOEBAE CLIENTS </ul>
-            <ul href="#">GUESTS</ul>
+            <h4>ACCOUNT DETAILS</h4>
+            <ul href="# ">{email}</ul>
+            <ul href="#">password</ul>
+            <button type="button">
+              <Link to="/useraccountform">update account</Link>
+            </button>
             <br />
             <h4>ORDER HISTORY</h4>
+            <table>
+              <tr>
+                <td>ORDER ID</td>
+                <td>STATUS</td>
+                <td>PRODUCT</td>
+                <td>PRICE</td>
+              </tr>
 
-            <ul href="# ">SHOEBAE CLIENTS </ul>
-            <ul href="#">GUESTS</ul>
+              {orders ? (
+                orders.filter(order => order.userId === userId).map(order => {
+                  return (
+                    <tr key={order.id}>
+                      <td>{order.id}</td>
+                      <td>{order.status}</td>
+                    </tr>
+                  )
+                })
+              ) : (
+                <span>~*NO ORDER HISTORY*~</span>
+              )}
+            </table>
           </Fragment>
-        ) : (
-          <div>
-            <Fragment>
-              <h4>ACCOUNT DETAILS</h4>
-              <ul href="# ">{email}</ul>
-              <ul href="#">password</ul>
-              <button type="button">
-                <Link to="/useraccountform">update account</Link>
-              </button>
-              <br />
-              <h4>ORDER HISTORY</h4>
-              <table>
-                <tr>
-                  <td>ORDER ID</td>
-                  <td>STATUS</td>
-                  <td>PRODUCT</td>
-                  <td>PRICE</td>
-                </tr>
-
-                {orders ? (
-                  orders.filter(order => order.userId === userId).map(order => {
-                    return (
-                      <tr key={order.id}>
-                        <td>{order.id}</td>
-                        <td>{order.status}</td>
-                      </tr>
-                    )
-                  })
-                ) : (
-                  <span>~*NO ORDER HISTORY*~</span>
-                )}
-              </table>
-            </Fragment>
-          </div>
-        )}
+        </div>
       </div>
     )
   }
