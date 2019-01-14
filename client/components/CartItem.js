@@ -6,6 +6,10 @@ class CartItem extends Component {
   handleClick = () => {
     const {product: {id}, removeFromCart} = this.props
     removeFromCart({id})
+    // REVIEW, compare and contrast:
+    // this.props.removeFromCart({
+    //   id: this.props.product.id
+    // })
   }
 
   render() {

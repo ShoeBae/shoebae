@@ -53,13 +53,14 @@ class AllProducts extends Component {
   }
 
   async componentDidMount() {
+    // REVIEW: assign/filter in mapState
     await this.props.fetchProducts()
-    this.setState({currentView: this.props.products})
   }
 
   handleChange(event) {
+    // REVIEW: filter in mapState
     if (event.target.value === 'all') {
-      this.setState({currentView: this.props.products.sort()})
+      //this.setState({currentView: this.props.products.sort()})
     } else {
       this.setState({
         currentView: this.props.products.filter(product => {
@@ -93,6 +94,7 @@ class AllProducts extends Component {
                     <Link
                       to={`/products/${product.id}`}
                       onClick={() => {
+                        // REVIEW: why is this here rather than in in lifecycle hook of routed component?
                         this.props.fetchProduct(product.id)
                       }}
                     >
@@ -135,10 +137,20 @@ class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = ({products, user}) => ({
-  products: products.productsList,
-  user
-})
+
+const mapStateToProps = ({products, user}, ownProps) => {
+  const category = ownProps.params.match.category
+  if (!category) {
+    currentView = products.sort()
+  }
+  else {
+    // filter based on category
+  }
+  return {
+    user,
+    currentView: currentView,
+  }
+}
 
 const dispatchToProps = dispatch => {
   return {

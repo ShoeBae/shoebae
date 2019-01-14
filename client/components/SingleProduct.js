@@ -88,6 +88,7 @@ const mapState = ({products: {currentProduct}, user}) => ({
   user
 })
 
+// REVIEW: map dispatch shorthand
 const mapDispatch = dispatch => ({
   selectProduct: id => {
     dispatch(selectProduct(id))

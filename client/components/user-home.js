@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchOrders} from '../store/order'
 
+
 /**
  * COMPONENT
  */
@@ -14,6 +15,7 @@ class UserHome extends Component {
     }
   }
   async componentDidMount() {
+    // REVIEW: why not through mapState?
     const allOrders = await this.props.fetchAllOrders()
     this.setState(allOrders)
   }

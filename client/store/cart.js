@@ -13,6 +13,7 @@ export const getToCart = product => dispatch => {
   dispatch(addToCart(product))
 }
 
+// REVIEW: some take object some take id ?
 export const deleteFromCart = product => dispatch => {
   dispatch(removeFromCart(product))
 }

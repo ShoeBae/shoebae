@@ -10,6 +10,14 @@ class Cart extends Component {
     const {cart} = this.props
     return (
       <div className="cart flex-center">
+        {/*
+          REVIEW: if (!cart[0]) is a little bit of a head trip
+
+          consider:
+          const cartIsEmpty = !cart.length
+          ...
+          { cartIsEmpty ? this.renderEmpty() : this.renderWithItems() }
+          */}
         {!cart[0] ? (
           <div className="empty">
             <div>Shopping cart is empty</div>

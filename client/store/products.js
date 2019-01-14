@@ -56,6 +56,7 @@ export const postProduct = newProduct => async dispatch => {
     const product = res.data
     dispatch(addProduct(product))
   } catch (err) {
+    // REVIEW: what to do with errors
     console.log(err)
   }
 }

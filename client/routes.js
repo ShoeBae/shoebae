@@ -6,6 +6,48 @@ import {Login, Signup, UserHome, SingleProduct, Cart} from './components'
 import {me} from './store'
 import AllProducts from './components/AllProducts'
 
+
+// GET /products?page=2&category=boots&year=2016&color=blue
+
+<Route path="/products" component={SearchContainer}>
+
+class SearchContainer extends React.Component {
+  // search params === { page: 2, category: 'boots', year: 2016 }
+  // search url /product-search?page=2&category=boots&year=2016&color=blue
+  componentDidMount () {
+    this.props.execSearch(this.queryPath)
+  }
+  componentDidUpdate () {
+    if (/* lastQueryPath !== currentQueryPath */) {
+      this.props.execSearch(this.queryPath)
+    }
+  }
+  makeSearchPath () {
+    const path = '/search?'
+    Object.entries(this.searchParams).forEach(([key, value]) => {
+      path += `&${key}=${value}`
+    })
+    ``
+    return path
+  }
+  handleColorChange (event) {
+    this.props.location.push(this.makeSearchPath())
+  }
+  render () {
+    return (
+      <div>
+        <input name="searchTerm"/>
+        <select name="color" onChange={this.handleColorChange}>
+          <option value="blue">Blue</option
+        </select>
+        {this.props.searcResults.length ? <SearchResults/> : <BlankSearchResults/>}
+      </div>
+    )
+  }
+}
+
+
+
 /**
  * COMPONENT
  */
@@ -21,12 +63,17 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/products" component={AllProducts} />
+        <Route exact path="/products/:category" component={AllProducts} />
 
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/account" component={UserHome} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
+        {isAdmin && (
+          <Route path="/admin/orders" component={AdminOrderList}/>
+          <Route path="/orders" component={CustomerOrderList}/>
+        )}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
