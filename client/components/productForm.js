@@ -42,7 +42,7 @@ export function ProductForm(props) {
             type="text"
             name="model"
             value={props.model}
-            onChange={props.updateHandler}
+            onChange={props.handleChange}
           />
           <br />
           <br />
@@ -53,7 +53,7 @@ export function ProductForm(props) {
             type="text"
             name="brand"
             value={props.brand}
-            onChange={props.updateHandler}
+            onChange={props.handleChange}
           />
           <br />
           <br />
@@ -67,7 +67,7 @@ export function ProductForm(props) {
               aria-label="Category"
               name="category"
               className={classes.group}
-              onChange={props.updateHandler}
+              onChange={props.handleChange}
             >
               <FormControlLabel
                 value="boot"
@@ -95,7 +95,7 @@ export function ProductForm(props) {
             type="text"
             name="size"
             // value={props.state.size}???
-            onChange={props.updateHandler}
+            onChange={props.handleChange}
           />
           <br />
           <br />
@@ -106,7 +106,7 @@ export function ProductForm(props) {
             type="text"
             name="color"
             value={props.color}
-            onChange={props.updateHandler}
+            onChange={props.handleChange}
           />
           <br />
           <br />
@@ -117,7 +117,7 @@ export function ProductForm(props) {
             type="text"
             name="price"
             value={props.price}
-            onChange={props.updateHandler}
+            onChange={props.handleChange}
           />
           <br />
           <br />
@@ -128,7 +128,7 @@ export function ProductForm(props) {
             type="text"
             name="image"
             value={props.imageUrl}
-            onChange={props.updateHandler}
+            onChange={props.handleChange}
           />
           <br />
           <br />
@@ -142,7 +142,7 @@ export function ProductForm(props) {
               props.color === '' ||
               props.price === ''
             }
-            onClick={props.submitHandler}
+            onClick={props.handleSubmit}
           >
             Submit
           </Button>
