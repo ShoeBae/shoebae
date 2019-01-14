@@ -114,9 +114,6 @@ class AllProducts extends Component {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small" color="primary">
-                        Add to Cart
-                      </Button>
                       {this.props.user.isAdmin ? (
                         <Button size="small" color="primary">
                           <Link to="/account">Edit</Link>

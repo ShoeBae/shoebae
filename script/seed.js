@@ -284,7 +284,7 @@ async function seed() {
     }),
     Product.create({
       model: 'Classic Checkerboard',
-      imageUrl: '/assets/shoes/vanspinkcheckerboardvans-45.jpg',
+      imageUrl: '/assets/shoes/pinkcheckerboardvans-45.jpg',
       color: 'pink',
       brand: 'Vans',
       category: 'sneaker',
