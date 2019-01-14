@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchOrders} from '../store/order'
@@ -43,7 +44,9 @@ class UserHome extends Component {
               <h4>ACCOUNT DETAILS</h4>
               <ul href="# ">{email}</ul>
               <ul href="#">password</ul>
-              <button type="button">update account</button>
+              <button type="button">
+                <Link to="/useraccountform">update account</Link>
+              </button>
               <br />
               <h4>ORDER HISTORY</h4>
               <table>
