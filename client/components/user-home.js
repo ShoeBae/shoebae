@@ -34,27 +34,29 @@ class UserHome extends Component {
             </button>
             <br />
             <h4>ORDER HISTORY</h4>
-            <table>
-              <tr>
-                <td>ORDER ID</td>
-                <td>STATUS</td>
-                <td>PRODUCT</td>
-                <td>PRICE</td>
-              </tr>
+            <tbody>
+              <table>
+                <tr>
+                  <td>ORDER ID</td>
+                  <td>STATUS</td>
+                  <td>PRODUCT</td>
+                  <td>PRICE</td>
+                </tr>
 
-              {orders ? (
-                orders.filter(order => order.userId === userId).map(order => {
-                  return (
-                    <tr key={order.id}>
-                      <td>{order.id}</td>
-                      <td>{order.status}</td>
-                    </tr>
-                  )
-                })
-              ) : (
-                <span>~*NO ORDER HISTORY*~</span>
-              )}
-            </table>
+                {orders ? (
+                  orders.filter(order => order.userId === userId).map(order => {
+                    return (
+                      <tr key={order.id}>
+                        <td>{order.id}</td>
+                        <td>{order.status}</td>
+                      </tr>
+                    )
+                  })
+                ) : (
+                  <span>~*NO ORDER HISTORY*~</span>
+                )}
+              </table>
+            </tbody>
           </Fragment>
         </div>
       </div>
