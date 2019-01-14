@@ -13,8 +13,42 @@ class AdminHome extends Component {
   }
   render() {
     const {email, userId, orders} = this.props
+    console.log('orders', orders)
 
-    return <div>Hello World</div>
+    return (
+      <Fragment>
+        <div>Welcome, {email}</div>
+        <br />
+        <h3>ACTIVE CARTS - SHOULD THIS BE AN EVENT TO CHANGE URL?</h3>
+        <h4 href="# ">SHOEBAE CLIENTS </h4>
+        <ul href="#">GUESTS</ul>
+        <br />
+        <h3>ORDER HISTORY</h3>
+
+        <ul href="# ">SHOEBAE CLIENTS </ul>
+        <table>
+          <tbody>
+            <tr>
+              <td>ORDER ID</td>
+              <td>STATUS</td>
+              <td>PRODUCT</td>
+              <td>PRICE</td>
+            </tr>
+            {orders.map(order => {
+              return (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{order.status}</td>
+                  <td>{order.product.model}</td>
+                  <td>{order.totalPrice}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+        <ul href="#">GUESTS</ul>
+      </Fragment>
+    )
   }
 }
 
