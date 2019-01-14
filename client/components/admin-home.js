@@ -19,6 +19,9 @@ class AdminHome extends Component {
       <Fragment>
         <div>Welcome, {email}</div>
         <br />
+        <button type="button">
+          <Link to="/admin/add">Add Product</Link>
+        </button>
         <h3>ACTIVE CARTS - SHOULD THIS BE AN EVENT TO CHANGE URL?</h3>
         <h4 href="# ">SHOEBAE CLIENTS </h4>
         <ul href="#">GUESTS</ul>
