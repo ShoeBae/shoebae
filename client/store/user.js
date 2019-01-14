@@ -16,6 +16,7 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
+
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -53,6 +54,16 @@ export const logout = () => async dispatch => {
     history.push('/login')
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const updateUser = (userId, updates) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/users/${userId}`, updates)
+    const user = res.data
+    dispatch(getUser(user))
+  } catch (error) {
+    console.error(error)
   }
 }
 

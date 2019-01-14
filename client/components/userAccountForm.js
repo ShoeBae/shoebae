@@ -15,23 +15,24 @@ class UserAccountForm extends Component {
   }
 
   handleChange(event) {
-    const field = event.target.name
-    this.setState({email: event.target.value})
-    console.log('email state', this.state.email)
+    this.setState({[event.target.name]: event.target.value})
+    console.log('email state', this.state)
   }
 
   handleSubmit(event) {
-    console.log('submit!')
+    event.preventDefault()
+    console.log('submitted!')
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form on onSubmit={this.handleSubmit}>
         <label>
-          Email
+          Update email
           <input
             type="text"
             name="email"
+            placeholder={this.props.user.email}
             value={this.state.email}
             onChange={this.handleChange}
           />
@@ -40,6 +41,7 @@ class UserAccountForm extends Component {
           Password
           <input
             type="text"
+            name="password"
             value={this.state.password}
             onChange={this.handleChange}
           />
@@ -48,6 +50,7 @@ class UserAccountForm extends Component {
           Shipping Address
           <input
             type="text"
+            name="shippingAddress"
             value={this.state.shippingAddress}
             onChange={this.handleChange}
           />
@@ -56,10 +59,12 @@ class UserAccountForm extends Component {
           Billing Address
           <input
             type="text"
+            name="billingAddress"
             value={this.state.billingAddress}
             onChange={this.handleChange}
           />
         </label>
+        <button type="submit">Update Information</button>
       </form>
     )
   }
