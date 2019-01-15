@@ -39,23 +39,19 @@ async function seed() {
   const reviews = await Promise.all([
     Review.create({
       rating: 5,
-      comment: 'REALLY FREAKIN COOL!',
-      productId: 1
+      comment: 'REALLY FREAKIN COOL!'
     }),
     Review.create({
       rating: 4,
-      comment: 'siiiiiiiiiiick',
-      productId: 2
+      comment: 'siiiiiiiiiiick'
     }),
     Review.create({
       rating: 1,
-      comment: 'meh',
-      productId: 3
+      comment: 'meh'
     }),
     Review.create({
       rating: 4,
-      comment: 'boss babe',
-      productId: 4
+      comment: 'boss babe'
     })
   ])
 
