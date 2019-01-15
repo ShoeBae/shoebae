@@ -76,7 +76,7 @@ class SingleProduct extends Component {
   render() {
     const {currentProduct, cart: {adding, items}, reviews, classes} = this.props
 
-    console.log(reviews, 'REVIEWS', classes, 'CLASSES')
+    console.log('CURRENT PRODUCT', currentProduct.id)
 
     if (!currentProduct.model) return <div>Loading...</div>
     return (
@@ -124,14 +124,20 @@ class SingleProduct extends Component {
         </div>
 
         <div>
-          {reviews.map(review => {
-            return (
-              <div key={review.id}>
-                <h3>{review.rating}</h3>
-                <h3>{review.comment}</h3>
-              </div>
-            )
-          })}
+          {reviews.filter(review => review.productId === currentProduct.id) ? (
+            reviews
+              .filter(review => review.productId === currentProduct.id)
+              .map(review => {
+                return (
+                  <div key={review.id}>
+                    <h3>{review.rating}</h3>
+                    <h3>{review.comment}</h3>
+                  </div>
+                )
+              })
+          ) : (
+            <div>No Reviews</div>
+          )}
         </div>
       </div>
     )
