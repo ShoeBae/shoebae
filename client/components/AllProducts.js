@@ -100,18 +100,19 @@ class AllProducts extends Component {
             <Grid container spacing={40}>
               {this.state.currentView.map(product => (
                 <Grid item key={product.id} sm={6} md={4} lg={3}>
-                  <Link
-                    to={`/products/${product.id}`}
-                    onClick={() => {
-                      this.props.selectProduct(product.id)
-                    }}
-                  >
-                    <Card className={classes.card}>
+                  <Card className={classes.card}>
+                    <Link
+                      to={`/products/${product.id}`}
+                      onClick={() => {
+                        this.props.selectProduct(product.id)
+                      }}
+                    >
                       <CardMedia
                         className={classes.cardMedia}
                         image={product.imageUrl}
                         title={product.model}
                       />
+
                       <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h5" component="h2">
                           {product.model}
@@ -122,36 +123,36 @@ class AllProducts extends Component {
                           ${product.price}
                         </Typography>
                       </CardContent>
-                      <CardActions>
-                        {this.props.user.isAdmin ? (
-                          <React.Fragment>
-                            <Button
-                              size="small"
-                              color="primary"
-                              onClick={() => {
-                                this.props.selectProduct(product.id)
-                                this.props.history.push('/admin/edit')
-                              }}
-                            >
-                              EDIT
-                            </Button>
-                            <Button
-                              size="small"
-                              color="primary"
-                              onClick={() => {
-                                this.props.selectProduct(product.id)
-                                this.props.history.push('/admin/delete')
-                              }}
-                            >
-                              DELETE
-                            </Button>
-                          </React.Fragment>
-                        ) : (
-                          <div />
-                        )}
-                      </CardActions>
-                    </Card>
-                  </Link>
+                    </Link>
+                    <CardActions>
+                      {this.props.user.isAdmin ? (
+                        <React.Fragment>
+                          <Button
+                            size="small"
+                            color="primary"
+                            onClick={() => {
+                              this.props.selectProduct(product.id)
+                              this.props.history.push('/admin/edit')
+                            }}
+                          >
+                            EDIT
+                          </Button>
+                          <Button
+                            size="small"
+                            color="primary"
+                            onClick={() => {
+                              this.props.selectProduct(product.id)
+                              this.props.history.push('/admin/delete')
+                            }}
+                          >
+                            DELETE
+                          </Button>
+                        </React.Fragment>
+                      ) : (
+                        <div />
+                      )}
+                    </CardActions>
+                  </Card>
                 </Grid>
               ))}
             </Grid>
