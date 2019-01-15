@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {selectProduct} from '../store/products'
 import {getToCart} from '../store/cart'
 import {fetchReviews} from '../store/reviews'
@@ -114,6 +115,16 @@ class SingleProduct extends Component {
                   {adding ? 'ADDING...' : 'ADD TO CART'}
                 </button>
               )}
+              <button
+                type="button"
+                onClick={() => {
+                  this.props.history.push(
+                    `/products/${currentProduct.id}/reviewform`
+                  )
+                }}
+              >
+                ADD REVIEW
+              </button>
               {this.state.flag && (
                 <div className="select-flag">{this.state.flag}</div>
               )}

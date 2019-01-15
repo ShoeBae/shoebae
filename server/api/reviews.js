@@ -20,19 +20,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/:productID', requireLogin, async (req, res, next) => {
-  try {
-    const review = await Review.create(
-      req.body.rating,
-      req.body.comment,
-      req.params.productID
-    )
-    res.json(review)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.put('/:productID/:reviewID', requireLogin, async (req, res, next) => {
   try {
     const data = req.body
@@ -42,6 +29,19 @@ router.put('/:productID/:reviewID', requireLogin, async (req, res, next) => {
     })
     const reviews = await Review.findAll()
     res.json(reviews)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/:productID', requireLogin, async (req, res, next) => {
+  try {
+    const review = await Review.create(
+      req.body.rating,
+      req.body.comment,
+      req.params.productID
+    )
+    res.json(review)
   } catch (err) {
     next(err)
   }

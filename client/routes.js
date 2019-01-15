@@ -14,11 +14,10 @@ import {
   AddProduct,
   EditProduct,
   DeleteProduct,
-  AddReview
+  ReviewForm
 } from './components'
 import {me} from './store'
 import {fetchCart} from './store/cart'
-import {ProductReview} from './components'
 
 /**
  * COMPONENT
@@ -44,9 +43,9 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/products/:id" component={SingleProduct} />
+        <Route exact path="/products/:id/reviewform" component={ReviewForm} />
+        <Route exact path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
-        <Route path="/reviews" component={ProductReview} />
 
         {/* move below route later */}
         {isAdmin && (
