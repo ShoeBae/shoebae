@@ -11,6 +11,7 @@ import {
   Typography
 } from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
+// import { Delete } from '@material-ui/icons'
 import classNames from 'classnames'
 import {fetchProducts, deleteProduct, selectProduct} from '../store/products'
 
@@ -114,13 +115,15 @@ class AllProducts extends Component {
                     </CardContent>
                     <CardActions>
                       {this.props.user.isAdmin ? (
-                        <Button size="small" color="primary">
-                          <Link to="/admin/edit">EDIT</Link>
-                        </Button>
+                        <React.Fragment>
+                          <Button size="small" color="primary">
+                            <Link to="/admin/edit">EDIT</Link>
+                          </Button>
+                          <Button size="small" color="primary">
+                            <Link to="/admin/delete">DELETE</Link>
+                          </Button>
+                        </React.Fragment>
                       ) : (
-                        //   <Button size="small" color="primary">
-                        //   <Link to="/admin/delete">DELETE</Link>
-                        //   </Button>
                         <div />
                       )}
                     </CardActions>
