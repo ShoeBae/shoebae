@@ -16,14 +16,17 @@ class UserAccountForm extends Component {
   }
 
   handleChange(event) {
+    event.preventDefault()
     this.setState({[event.target.name]: event.target.value})
+    console.log('here')
     console.log('email state', this.state)
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
     console.log('submitted!')
-    this.props.updateAccount(this.props.user.id, this.state)
+    await this.props.updateAccount(this.props.user.id, this.state)
+    this.props.history.push('/account')
   }
 
   render() {

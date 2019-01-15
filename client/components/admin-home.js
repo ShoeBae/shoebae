@@ -1,15 +1,28 @@
 import React, {Component, Fragment} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchOrders} from '../store/order'
+import SearchContainer from './SearchContainer'
 
 /**
  * COMPONENT
  */
 class AdminHome extends Component {
+  constructor() {
+    super()
+    this.state = {
+      status: ''
+    }
+    this.onChange = this.onChange.bind(this)
+  }
   async componentDidMount() {
-    const allOrders = await this.props.fetchAllOrders()
+    await this.props.fetchAllOrders()
+  }
+
+  onChange(event) {
+    console.log(event.target.value)
+    this.setState({status: event.target.value})
   }
   render() {
     const {email, userId, orders} = this.props
@@ -19,6 +32,7 @@ class AdminHome extends Component {
       <Fragment>
         <div>Welcome, {email}</div>
         <br />
+        <h3>ADD NEW PRODUCT</h3>
         <button type="button">
           <Link to="/admin/add">Add Product</Link>
         </button>
@@ -27,9 +41,17 @@ class AdminHome extends Component {
         <ul href="#">GUESTS</ul>
         <br />
         <h3>ORDER HISTORY</h3>
+        <div className="orderFilter">
+          <select name="sortBy" onChange={this.onChange}>
+            <option value="">ALL ORDERS </option>
+            <option value="created">CREATED</option>
+            <option value="processing">PROCESSING</option>
+            <option value="completed">COMPLETED</option>
+            <option value="canceled">CANCELED</option>
+          </select>
+        </div>
 
-        <ul href="# ">SHOEBAE CLIENTS </ul>
-        <table>
+        <table href="#">
           <tbody>
             <tr>
               <td>ORDER ID</td>
@@ -37,16 +59,22 @@ class AdminHome extends Component {
               <td>PRODUCT</td>
               <td>PRICE</td>
             </tr>
-            {orders.map(order => {
-              return (
-                <tr key={order.id}>
-                  <td>{order.id}</td>
-                  <td>{order.status}</td>
-                  <td>PRODUCT DETAILS</td>
-                  <td>{order.totalPrice}</td>
-                </tr>
+            {orders
+              .sort()
+              .filter(
+                order =>
+                  this.state.status ? order.status === this.state.status : order
               )
-            })}
+              .map(order => {
+                return (
+                  <tr key={order.id}>
+                    <td>{order.id}</td>
+                    <td>{order.status}</td>
+                    <td>PRODUCT DETAILS</td>
+                    <td>{order.totalPrice}</td>
+                  </tr>
+                )
+              })}
           </tbody>
         </table>
         <ul href="#">GUESTS</ul>
@@ -58,12 +86,12 @@ class AdminHome extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = ({user, orders}) => {
   return {
-    userId: state.user.id,
-    userInfo: state.user,
-    email: state.user.email,
-    orders: state.orders
+    userId: user.id,
+    userInfo: user,
+    email: user.email,
+    orders: orders
   }
 }
 
@@ -72,6 +100,7 @@ const dispatchProps = dispatch => {
     fetchAllOrders: () => dispatch(fetchOrders())
   }
 }
+
 export default connect(mapState, dispatchProps)(AdminHome)
 
 /**
