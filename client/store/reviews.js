@@ -63,7 +63,7 @@ export const deleteReview = reviewID => async dispatch => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_REVIEWS:
-      return [...state, ...action.reviews]
+      return action.reviews
     case EDIT_REVIEW:
       return state.map(
         review => (review.id === action.review.id ? action.review : review)
