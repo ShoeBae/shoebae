@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  background-color: #f8f8f8;
 }
 *,
 *:before,
@@ -46,6 +47,7 @@ form div {
 .navbar {
   flex-direction: column;
   width: 100%;
+  background-color: #fff;
 }
 
 .navbar-logo,
@@ -74,7 +76,7 @@ form div {
 
 .single-product {
   display: flex;
-  background-color: aqua;
+  /* background-color: aqua; */
   margin: 10px;
 }
 
@@ -82,13 +84,14 @@ form div {
   margin: 10px;
 }
 
-.single-product .images {
+/* .single-product .images {
   flex: 2.5;
   background-color: teal;
-}
+} */
 
 .single-product .images img {
-  /** to be determined **/
+  height: 300px;
+  width: 400px;
 }
 
 .single-product .content {
@@ -107,6 +110,17 @@ form div {
   height: 60px;
   margin: 5px 0px 0px 0px;
   border-radius: 0px;
+}
+
+.single-product .add-to-cart button {
+  color: #fff;
+  background-color: #000;
+}
+
+.single-product .add-to-cart button.active:hover {
+  background-color: #f02525;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 .single-product .select-flag {

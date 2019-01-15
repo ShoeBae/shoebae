@@ -4,11 +4,12 @@ import {deleteFromCart} from '../store/cart'
 
 class CartItem extends Component {
   handleClick = () => {
-    const {product: {id}, removeFromCart} = this.props
-    removeFromCart({id})
+    const {id, removeFromCart} = this.props
+    removeFromCart(id)
   }
 
   render() {
+    console.log(this.props, '<<<PROPS')
     const {product, selectedSize} = this.props
     return (
       <div className="cart-item">
@@ -31,8 +32,8 @@ class CartItem extends Component {
 }
 
 const mapProps = dispatch => ({
-  removeFromCart: product => {
-    dispatch(deleteFromCart(product))
+  removeFromCart(cartItemId) {
+    dispatch(deleteFromCart(cartItemId))
   }
 })
 

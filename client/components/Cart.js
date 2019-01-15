@@ -7,10 +7,10 @@ import CartItem from './CartItem'
 
 class Cart extends Component {
   render() {
-    const {cart} = this.props
+    const {cart: {items}} = this.props
     return (
       <div className="cart flex-center">
-        {!cart[0] ? (
+        {!items[0] ? (
           <div className="empty">
             <div>Shopping cart is empty</div>
             <div>You have no items in your cart</div>
@@ -24,7 +24,7 @@ class Cart extends Component {
             {/* <div>You have {cart.length} item in your cart</div> */}
             <main>
               <div className="products">
-                {cart.map(product => (
+                {items.map(product => (
                   <CartItem {...product} key={product.id + product.brand} />
                 ))}
               </div>

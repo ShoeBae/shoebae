@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {selectProduct} from '../store/products'
 import {getToCart} from '../store/cart'
@@ -7,7 +7,6 @@ import ProductReview from '../components/ProductReview'
 class SingleProduct extends Component {
   state = {
     selectedSize: '',
-    qtyAddedToCart: 0,
     flag: ''
   }
 
@@ -30,24 +29,19 @@ class SingleProduct extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const {selectedSize, qtyAddedToCart} = this.state
+    const {selectedSize} = this.state
     const {currentProduct: product} = this.props
-    if (selectedSize === '' && qtyAddedToCart === 0) {
+    if (selectedSize === '') {
       this.setState({flag: 'Please select a size'})
-    } else if (qtyAddedToCart > 0) {
-      this.setState({
-        flag: 'This product is limited to one'
-      })
     } else {
       this.setState({
-        qtyAddedToCart: 1,
         flag: ''
       })
       this.props.addToCart({product, selectedSize})
     }
   }
   render() {
-    const {currentProduct} = this.props
+    const {currentProduct, cart: {adding, items}} = this.props
     if (!currentProduct.model) return <div>Loading...</div>
     return (
       <div className="single-product">
@@ -58,19 +52,32 @@ class SingleProduct extends Component {
           <span>{currentProduct.brand}</span>
           <span>{currentProduct.model}</span>
           <span>${currentProduct.price}</span>
+          <div>*Limited to 1 per order</div>
+
           {currentProduct.sizes[0] ? (
             <form onSubmit={this.handleSubmit} className="add-to-cart">
               <select onChange={this.handleChange}>
                 <option>Select A Size</option>
-                {currentProduct.sizes.map(size => size.length).map(size => {
-                  return (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  )
-                })}
+                {currentProduct.sizes
+                  .map(size => size.length)
+                  .map(size => {
+                    return (
+                      <option key={size} value={size}>
+                        {size}
+                      </option>
+                    )
+                  })
+                  .sort()}
               </select>
-              <button type="submit">Add To Cart</button>
+              {items.find(item => item.productId === currentProduct.id) ? (
+                <button disabled type="button">
+                  ADDED
+                </button>
+              ) : (
+                <button className="active" type="submit">
+                  {adding ? 'ADDING...' : 'ADD TO CART'}
+                </button>
+              )}
               {this.state.flag && (
                 <div className="select-flag">{this.state.flag}</div>
               )}
@@ -79,22 +86,23 @@ class SingleProduct extends Component {
             <div>No sizes currently available</div>
           )}
         </div>
-        {currentProduct.reviews.map(review => (
+        {/* {currentProduct.reviews.map(review => (
           <ProductReview
             key={review.id}
             review={review}
             userId={userId}
             history={this.props.history}
           />
-        ))}
+        ))} */}
       </div>
     )
   }
 }
 
-const mapState = ({products: {currentProduct}, user}) => ({
+const mapState = ({products: {currentProduct}, user, cart}) => ({
   currentProduct,
-  user
+  user,
+  cart
 })
 
 const mapDispatch = dispatch => ({
@@ -107,3 +115,7 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
+
+// size select also needs to get disabled
+/* note stating product limited to one */
+// maybe add user ability to change size in cart

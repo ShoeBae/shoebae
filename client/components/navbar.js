@@ -42,7 +42,7 @@ const Navbar = ({handleClick, isLoggedIn, cartCount, isAdmin}) => (
  */
 const mapState = state => {
   return {
-    cartCount: state.cart.length,
+    cartCount: state.cart.items.length,
     isLoggedIn: !!state.user.id,
     isAdmin: state.user.isAdmin
   }
