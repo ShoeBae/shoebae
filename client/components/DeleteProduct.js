@@ -77,7 +77,7 @@ export function DeleteProduct(props) {
   )
 }
 
-const mapStateToProps = ({products, history}) => {
+const mapStateToProps = ({products}, {history}) => {
   return {
     currentProduct: products.currentProduct,
     history
