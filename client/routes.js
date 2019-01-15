@@ -9,12 +9,13 @@ import {
   SingleProduct,
   Cart,
   UserAccountForm,
-  AdminHome
+  AdminHome,
+  AllProducts,
+  AddProduct,
+  EditProduct,
+  DeleteProduct
 } from './components'
 import {me} from './store'
-import AllProducts from './components/AllProducts'
-import productForm from './components/productForm'
-import AddProduct from './components/AddProduct'
 
 /**
  * COMPONENT
@@ -25,7 +26,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isAdmin} = this.props
 
     return (
       <Switch>
@@ -33,15 +34,22 @@ class Routes extends Component {
         <Route exact path="/useraccountform" component={UserAccountForm} />
 
         <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/admin" component={AdminHome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/account" component={UserHome} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
 
-        {/* move below route later */}
+        {/* {isAdmin ? (
+          <Switch> */}
+        <Route exact path="/admin" component={AdminHome} />
         <Route path="/admin/add" component={AddProduct} />
+        <Route path="/admin/edit" component={EditProduct} />
+        <Route path="/admin/delete" component={DeleteProduct} />
+        {/* </Switch>
+        ) : (
+          <div />
+        )} */}
 
         {isLoggedIn && (
           <Switch>
@@ -63,7 +71,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 

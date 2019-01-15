@@ -47,8 +47,7 @@ class AllProducts extends Component {
   constructor() {
     super()
     this.state = {
-      currentView: [],
-      selectedProduct: {}
+      currentView: []
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -116,9 +115,12 @@ class AllProducts extends Component {
                     <CardActions>
                       {this.props.user.isAdmin ? (
                         <Button size="small" color="primary">
-                          <Link to="/admin/edit">Edit</Link>
+                          <Link to="/admin/edit">EDIT</Link>
                         </Button>
                       ) : (
+                        //   <Button size="small" color="primary">
+                        //   <Link to="/admin/delete">DELETE</Link>
+                        //   </Button>
                         <div />
                       )}
                     </CardActions>
