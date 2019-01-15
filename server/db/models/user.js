@@ -33,6 +33,8 @@ const User = db.define('user', {
   }
 })
 
+User.userFields = ['email', 'password']
+
 module.exports = User
 
 /**

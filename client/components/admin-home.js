@@ -9,7 +9,7 @@ import {fetchOrders} from '../store/order'
  */
 class AdminHome extends Component {
   async componentDidMount() {
-    const allOrders = await this.props.fetchAllOrders()
+    await this.props.fetchAllOrders()
   }
   render() {
     const {email, userId, orders} = this.props
