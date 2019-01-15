@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import ProductForm from './productForm'
+import ReviewForm from './productForm'
 import {postProduct} from '../store/products'
 import {withStyles} from '@material-ui/core'
 
@@ -17,7 +17,7 @@ const styles = theme => ({
   }
 })
 
-class AddProduct extends Component {
+class AddReview extends Component {
   constructor() {
     super()
     this.state = {
@@ -49,7 +49,7 @@ class AddProduct extends Component {
     return (
       <div className={classes.layout}>
         <h2>Add Product</h2>
-        <ProductForm
+        <ReviewForm
           props={this.state}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

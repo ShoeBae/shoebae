@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Review} = require('../db/models')
-const {requireAdmin} = require('../util')
+const {requireLogin} = require('../util')
 const _ = require('lodash')
 module.exports = router
 
@@ -11,7 +11,7 @@ module.exports = router
 //   }
 // }
 
-router.get('/:productID', async (req, res, next) => {
+router.get('/:productID', requireLogin, async (req, res, next) => {
   try {
     const reviews = await Review.findAll({
       where: {
@@ -24,7 +24,7 @@ router.get('/:productID', async (req, res, next) => {
   }
 })
 
-router.post('/:productID', requireAdmin, async (req, res, next) => {
+router.post('/:productID', requireLogin, async (req, res, next) => {
   try {
     const review = await Review.create(
       req.body.rating,
@@ -37,7 +37,7 @@ router.post('/:productID', requireAdmin, async (req, res, next) => {
   }
 })
 
-router.put('/:productID/:reviewID', requireAdmin, async (req, res, next) => {
+router.put('/:productID/:reviewID', requireLogin, async (req, res, next) => {
   try {
     const data = req.body
     const id = req.params.reviewID
@@ -51,7 +51,7 @@ router.put('/:productID/:reviewID', requireAdmin, async (req, res, next) => {
   }
 })
 
-router.delete('/productID/:reviewID', requireAdmin, async (req, res, next) => {
+router.delete('/productID/:reviewID', requireLogin, async (req, res, next) => {
   try {
     await Review.destroy({
       where: {

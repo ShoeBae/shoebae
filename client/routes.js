@@ -13,7 +13,8 @@ import {
   AllProducts,
   AddProduct,
   EditProduct,
-  DeleteProduct
+  DeleteProduct,
+  AddReview
 } from './components'
 import {me} from './store'
 import {fetchCart} from './store/cart'
@@ -62,6 +63,8 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/account" component={UserHome} />
+            <Route path="/reviews" component={AddReview} />
+
             <Route path="/" component={AllProducts} />
           </Switch>
         )}
