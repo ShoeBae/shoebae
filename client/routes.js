@@ -9,12 +9,13 @@ import {
   SingleProduct,
   Cart,
   UserAccountForm,
-  AdminHome
+  AdminHome,
+  AllProducts,
+  AddProduct,
+  EditProduct,
+  DeleteProduct
 } from './components'
 import {me} from './store'
-import AllProducts from './components/AllProducts'
-import productForm from './components/productForm'
-import AddProduct from './components/AddProduct'
 
 /**
  * COMPONENT
@@ -33,7 +34,6 @@ class Routes extends Component {
         <Route exact path="/useraccountform" component={UserAccountForm} />
 
         <Route exact path="/products" component={AllProducts} />
-
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/account" component={UserHome} />
@@ -46,12 +46,14 @@ class Routes extends Component {
             <Route exact path="/admin" component={AdminHome} />
             <Route path="/admin/orders/:status" component={AdminHome} />
             <Route path="/admin/add" component={AddProduct} />
+            <Route path="/admin/edit" component={EditProduct} />
+            <Route path="/admin/delete" component={DeleteProduct} />
           </React.Fragment>
         )}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={AllProducts} />
+            <Route path="/" component={AllProducts} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
