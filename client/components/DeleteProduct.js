@@ -41,21 +41,32 @@ const styles = theme => ({
 })
 
 export function DeleteProduct(props) {
-  const {classes} = props
+  const {classes, currentProduct} = props
 
+  console.log(props)
   return (
     <React.Fragment>
       <div className={classes.layout}>
         <Card className={classes.card}>
           <CardMedia
             className={classes.cardMedia}
-            image={props.imageUrl}
-            title={props.model}
+            image={currentProduct.imageUrl}
+            title={currentProduct.model}
           />
           <CardContent className={classes.cardContent}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {currentProduct.model}
+            </Typography>
             <Typography>Confirm Delete?</Typography>
             <CardActions>
-              <Button size="small" color="primary">
+              <Button
+                size="small"
+                color="primary"
+                onClick={async () => {
+                  await props.deleteProduct(currentProduct.id)
+                  props.history.push('/products')
+                }}
+              >
                 DELETE
               </Button>
             </CardActions>
@@ -66,9 +77,10 @@ export function DeleteProduct(props) {
   )
 }
 
-const mapStateToProps = ({products}) => {
+const mapStateToProps = ({products, history}) => {
   return {
-    product: products
+    currentProduct: products.currentProduct,
+    history
   }
 }
 

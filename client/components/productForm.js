@@ -30,7 +30,6 @@ const styles = theme => ({
 
 export function ProductForm(props) {
   const {classes} = props
-
   return (
     <React.Fragment>
       <main className={classes.layout}>

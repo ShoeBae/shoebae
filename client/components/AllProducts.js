@@ -116,11 +116,25 @@ class AllProducts extends Component {
                     <CardActions>
                       {this.props.user.isAdmin ? (
                         <React.Fragment>
-                          <Button size="small" color="primary">
-                            <Link to="/admin/edit">EDIT</Link>
+                          <Button
+                            size="small"
+                            color="primary"
+                            onClick={() => {
+                              this.props.selectProduct(product.id)
+                              this.props.history.push('/admin/edit')
+                            }}
+                          >
+                            EDIT
                           </Button>
-                          <Button size="small" color="primary">
-                            <Link to="/admin/delete">DELETE</Link>
+                          <Button
+                            size="small"
+                            color="primary"
+                            onClick={() => {
+                              this.props.selectProduct(product.id)
+                              this.props.history.push('/admin/delete')
+                            }}
+                          >
+                            DELETE
                           </Button>
                         </React.Fragment>
                       ) : (
@@ -138,9 +152,10 @@ class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = ({products, user}) => ({
+const mapStateToProps = ({products, user}, {history}) => ({
   products: products.productsList,
-  user
+  user,
+  history
 })
 
 const dispatchToProps = dispatch => {

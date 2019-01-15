@@ -79,7 +79,6 @@ export default function(state = defaultUser, action) {
       return state.map(
         user => (user.id === action.user.id ? action.user : user)
       )
-
     case REMOVE_USER:
       return defaultUser
     default:

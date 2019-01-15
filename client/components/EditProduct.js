@@ -21,12 +21,7 @@ class EditProduct extends Component {
   constructor() {
     super()
     this.state = {
-      model: '',
-      imageUrl: '',
-      color: '',
-      brand: '',
-      category: '',
-      price: 0
+      currentProduct: {}
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -60,7 +55,7 @@ class EditProduct extends Component {
   }
 }
 
-const mapProps = state => {
+const mapStateToProps = state => {
   return {
     currentProduct: state.products.currentProduct
   }
@@ -72,4 +67,6 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapProps, mapDispatch)(withStyles(styles)(EditProduct))
+export default connect(mapStateToProps, mapDispatch)(
+  withStyles(styles)(EditProduct)
+)
