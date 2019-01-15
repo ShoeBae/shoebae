@@ -6,7 +6,6 @@ import {getToCart} from '../store/cart'
 class SingleProduct extends Component {
   state = {
     selectedSize: '',
-    qtyAddedToCart: 0,
     flag: ''
   }
 
@@ -29,24 +28,19 @@ class SingleProduct extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const {selectedSize, qtyAddedToCart} = this.state
+    const {selectedSize} = this.state
     const {currentProduct: product} = this.props
-    if (selectedSize === '' && qtyAddedToCart === 0) {
+    if (selectedSize === '') {
       this.setState({flag: 'Please select a size'})
-    } else if (qtyAddedToCart > 0) {
-      this.setState({
-        flag: 'This product is limited to one'
-      })
     } else {
       this.setState({
-        qtyAddedToCart: 1,
         flag: ''
       })
       this.props.addToCart({product, selectedSize})
     }
   }
   render() {
-    const {currentProduct} = this.props
+    const {currentProduct, cart} = this.props
     if (!currentProduct.model) return <div>Loading...</div>
     return (
       <div className="single-product">
@@ -72,7 +66,17 @@ class SingleProduct extends Component {
                   })
                   .sort()}
               </select>
-              <button type="submit">Add To Cart</button>
+              {cart.find(item => item.productId === currentProduct.id) ? (
+                <button type="button" disabled>
+                  item currently in cart
+                </button>
+              ) : (
+                <button type="submit">Add To Cart</button>
+              )
+              // size select also needs to get disabled
+              /* note stating product limited to one */
+              // maybe add user ability to change size in cart
+              }
               {this.state.flag && (
                 <div className="select-flag">{this.state.flag}</div>
               )}
@@ -86,9 +90,10 @@ class SingleProduct extends Component {
   }
 }
 
-const mapState = ({products: {currentProduct}, user}) => ({
+const mapState = ({products: {currentProduct}, user, cart}) => ({
   currentProduct,
-  user
+  user,
+  cart
 })
 
 const mapDispatch = dispatch => ({

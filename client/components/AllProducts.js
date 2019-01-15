@@ -31,7 +31,10 @@ const styles = theme => ({
   card: {
     height: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    border: 'none',
+    boxShadow: 'none',
+    borderRadius: '0px'
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
@@ -39,7 +42,14 @@ const styles = theme => ({
   },
   cardContent: {
     flexGrow: 1,
-    align: 'center'
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center'
+  },
+  productBrand: {
+    color: '#b0b0b0'
   }
 })
 
@@ -90,39 +100,38 @@ class AllProducts extends Component {
             <Grid container spacing={40}>
               {this.state.currentView.map(product => (
                 <Grid item key={product.id} sm={6} md={4} lg={3}>
-                  <Card className={classes.card}>
-                    <Link
-                      to={`/products/${product.id}`}
-                      onClick={() => {
-                        this.props.selectProduct(product.id)
-                      }}
-                    >
+                  <Link
+                    to={`/products/${product.id}`}
+                    onClick={() => {
+                      this.props.selectProduct(product.id)
+                    }}
+                  >
+                    <Card className={classes.card}>
                       <CardMedia
                         className={classes.cardMedia}
                         image={product.imageUrl}
                         title={product.model}
                       />
-                    </Link>
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {product.model}
-                      </Typography>
-                      <Typography>
-                        {product.brand}
-                        <br />
-                        ${product.price}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      {this.props.user.isAdmin ? (
-                        <Button size="small" color="primary">
-                          <Link to="/admin/edit">Edit</Link>
-                        </Button>
-                      ) : (
-                        <div />
-                      )}
-                    </CardActions>
-                  </Card>
+                      <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {product.model}
+                        </Typography>
+                        <Typography className={classes.productBrand}>
+                          {product.brand}
+                        </Typography>
+                        <Typography>${product.price}</Typography>
+                      </CardContent>
+                      <CardActions>
+                        {this.props.user.isAdmin ? (
+                          <Button size="small" color="primary">
+                            <Link to="/admin/edit">Edit</Link>
+                          </Button>
+                        ) : (
+                          <div />
+                        )}
+                      </CardActions>
+                    </Card>
+                  </Link>
                 </Grid>
               ))}
             </Grid>

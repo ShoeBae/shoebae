@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  background-color: #f8f8f8;
 }
 *,
 *:before,
@@ -46,6 +47,7 @@ form div {
 .navbar {
   flex-direction: column;
   width: 100%;
+  background-color: #fff;
 }
 
 .navbar-logo,
