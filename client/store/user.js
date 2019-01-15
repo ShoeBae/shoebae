@@ -76,7 +76,7 @@ export default function(state = defaultUser, action) {
     case GET_USER:
       return action.user
     case EDIT_USER:
-      return [state].map(
+      return state.map(
         user => (user.id === action.user.id ? action.user : user)
       )
 
