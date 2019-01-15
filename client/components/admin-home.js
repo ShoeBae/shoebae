@@ -9,7 +9,11 @@ import {fetchOrders} from '../store/order'
  */
 class AdminHome extends Component {
   async componentDidMount() {
-    const allOrders = await this.props.fetchAllOrders()
+    await this.props.fetchAllOrders()
+  }
+
+  sortOrdersByStatus(event) {
+    console.log(this.props)
   }
   render() {
     const {email, userId, orders} = this.props
@@ -19,6 +23,7 @@ class AdminHome extends Component {
       <Fragment>
         <div>Welcome, {email}</div>
         <br />
+        <h3>ADD NEW PRODUCT</h3>
         <button type="button">
           <Link to="/admin/add">Add Product</Link>
         </button>
@@ -28,8 +33,16 @@ class AdminHome extends Component {
         <br />
         <h3>ORDER HISTORY</h3>
 
-        <ul href="# ">SHOEBAE CLIENTS </ul>
-        <table>
+        <div className="orderFilter">
+          <select name="sortBy" onChange={this.sortOrdersByStatus}>
+            <option>sort orders by status</option>
+            <option value="created">All Categories</option>
+            <option value="processing">Boots</option>
+            <option value="completed">Dress</option>
+            <option value="canceled">Sneakers</option>
+          </select>
+        </div>
+        <table href="#">
           <tbody>
             <tr>
               <td>ORDER ID</td>
@@ -58,12 +71,20 @@ class AdminHome extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = ({user, orders}, ownProps) => {
+  const status = ownProps.params.match.status
+  let currentStatus
+  if (!status) {
+    currentStatus = orders.sort()
+  } else {
+    currentStatus = orders.filter(order => order.status === status)
+  }
   return {
-    userId: state.user.id,
-    userInfo: state.user,
-    email: state.user.email,
-    orders: state.orders
+    currentStatus,
+    userId: user.id,
+    userInfo: user,
+    email: user.email,
+    orders: orders
   }
 }
 
@@ -72,6 +93,7 @@ const dispatchProps = dispatch => {
     fetchAllOrders: () => dispatch(fetchOrders())
   }
 }
+
 export default connect(mapState, dispatchProps)(AdminHome)
 
 /**

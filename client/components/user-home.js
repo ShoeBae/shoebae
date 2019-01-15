@@ -8,15 +8,8 @@ import {fetchOrders} from '../store/order'
  * COMPONENT
  */
 class UserHome extends Component {
-  constructor() {
-    super()
-    this.state = {
-      allOrders: []
-    }
-  }
   async componentDidMount() {
-    const allOrders = await this.props.fetchAllOrders()
-    this.setState(allOrders)
+    await this.props.fetchAllOrders()
   }
   render() {
     const {email, userId, orders} = this.props
@@ -25,16 +18,16 @@ class UserHome extends Component {
       <div>
         <h3>Welcome, {email}</h3>
         <div>
-          <Fragment>
-            <h4>ACCOUNT DETAILS</h4>
-            <ul href="# ">{email}</ul>
-            <ul href="#">password</ul>
-            <button type="button">
-              <Link to="/useraccountform">update account</Link>
-            </button>
-            <br />
-            <h4>ORDER HISTORY</h4>
-            <table>
+          <h4>ACCOUNT DETAILS</h4>
+          <ul href="# ">{email}</ul>
+          <ul href="#">password</ul>
+          <button type="button">
+            <Link to="/useraccountform">update account</Link>
+          </button>
+          <br />
+          <h4>ORDER HISTORY</h4>
+          <table>
+            <tbody>
               <tr>
                 <td>ORDER ID</td>
                 <td>STATUS</td>
@@ -54,8 +47,8 @@ class UserHome extends Component {
               ) : (
                 <span>~*NO ORDER HISTORY*~</span>
               )}
-            </table>
-          </Fragment>
+            </tbody>
+          </table>
         </div>
       </div>
     )
