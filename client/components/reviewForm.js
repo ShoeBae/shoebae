@@ -57,13 +57,12 @@ class ReviewForm extends React.Component {
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
-    console.log(this.state)
   }
 
   async handleSubmit(event) {
     event.preventDefault()
     await this.props.postReview(this.props.currentProduct.id, this.state)
-    this.props.history.push(`/products/${this.props.currentProduct.id}`)
+    this.props.history.push(`/products`)
   }
 
   render() {
@@ -110,10 +109,10 @@ class ReviewForm extends React.Component {
   }
 }
 
-const mapState = ({reviews, currentProduct}) => {
+const mapState = ({reviews, products}) => {
   return {
     reviews,
-    currentProduct
+    currentProduct: products.currentProduct
   }
 }
 

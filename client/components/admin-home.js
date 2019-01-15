@@ -21,12 +21,10 @@ class AdminHome extends Component {
   }
 
   onChange(event) {
-    console.log(event.target.value)
     this.setState({status: event.target.value})
   }
   render() {
     const {email, userId, orders} = this.props
-    console.log('orders', orders)
 
     return (
       <Fragment>

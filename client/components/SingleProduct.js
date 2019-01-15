@@ -43,10 +43,10 @@ class SingleProduct extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {id} = this.props.match.params
-    this.props.selectProduct(id)
-    this.props.setReviews()
+    await this.props.selectProduct(id)
+    await this.props.setReviews()
   }
 
   handleChange = event => {
@@ -76,8 +76,6 @@ class SingleProduct extends Component {
   }
   render() {
     const {currentProduct, cart: {adding, items}, reviews, classes} = this.props
-
-    console.log('CURRENT PRODUCT', currentProduct.id)
 
     if (!currentProduct.model) return <div>Loading...</div>
     return (
@@ -135,7 +133,7 @@ class SingleProduct extends Component {
         </div>
 
         <div>
-          {reviews.filter(review => review.productId === currentProduct.id) ? (
+          {reviews ? (
             reviews
               .filter(review => review.productId === currentProduct.id)
               .map(review => {

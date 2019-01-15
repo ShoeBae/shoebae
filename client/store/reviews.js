@@ -4,6 +4,7 @@ import axios from 'axios'
 const SET_REVIEWS = 'SET_REVIEWS'
 const EDIT_REVIEW = 'EDIT_REVIEW'
 const REMOVE_REVIEW = 'REMOVE_REVIEW'
+const ADD_REVIEW = 'ADD_REVIEW'
 
 //INITIAL STATE
 const initialState = []
@@ -12,7 +13,7 @@ const initialState = []
 
 const setReviews = reviews => ({type: SET_REVIEWS, reviews})
 const editReview = review => ({type: EDIT_REVIEW, review})
-// const addReview = reviewID => ({type: ADD_REVIEW, reviewID})
+const addReview = review => ({type: ADD_REVIEW, review})
 const removeReview = reviewID => ({type: REMOVE_REVIEW, reviewID})
 
 //THUNK CREATORS
@@ -44,7 +45,7 @@ export const postReview = (productID, newReview) => async dispatch => {
   try {
     const res = await axios.post(`/api/reviews/${productID}`, newReview)
     const review = res.data
-    dispatch(setReviews(review))
+    dispatch(addReview(review))
   } catch (err) {
     console.log(err)
   }
@@ -68,8 +69,8 @@ export default function(state = initialState, action) {
       return state.map(
         review => (review.id === action.review.id ? action.review : review)
       )
-    // case ADD_REVIEW:
-    //   return [...state, action.review]
+    case ADD_REVIEW:
+      return [...state, action.review]
     case REMOVE_REVIEW:
       return state.filter(review => review.id !== action.reviewID)
     default:

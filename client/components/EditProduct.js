@@ -30,7 +30,6 @@ class EditProduct extends Component {
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
-    console.log(this.state)
   }
 
   async handleSubmit(event) {
@@ -41,7 +40,6 @@ class EditProduct extends Component {
 
   render() {
     const {classes} = this.props
-    console.log(this.props.currentProduct)
     return (
       <div className={classes.layout}>
         <h2>Edit Product</h2>

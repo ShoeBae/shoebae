@@ -36,11 +36,11 @@ router.put('/:productID/:reviewID', requireLogin, async (req, res, next) => {
 
 router.post('/:productID', requireLogin, async (req, res, next) => {
   try {
-    const review = await Review.create(
-      req.body.rating,
-      req.body.comment,
-      req.params.productID
-    )
+    const review = await Review.create({
+      rating: req.body.rating,
+      comment: req.body.comment,
+      productId: req.params.productID
+    })
     res.json(review)
   } catch (err) {
     next(err)
