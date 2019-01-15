@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {selectProduct} from '../store/products'
 import {getToCart} from '../store/cart'
+import ProductReview from '../components/ProductReview'
 
 class SingleProduct extends Component {
   state = {
@@ -41,7 +42,6 @@ class SingleProduct extends Component {
   }
   render() {
     const {currentProduct, cart: {adding, items}} = this.props
-    console.log(currentProduct, '<<O CURRRRR')
     if (!currentProduct.model) return <div>Loading...</div>
     return (
       <div className="single-product">
@@ -86,6 +86,14 @@ class SingleProduct extends Component {
             <div>No sizes currently available</div>
           )}
         </div>
+        {/* {currentProduct.reviews.map(review => (
+          <ProductReview
+            key={review.id}
+            review={review}
+            userId={userId}
+            history={this.props.history}
+          />
+        ))} */}
       </div>
     )
   }

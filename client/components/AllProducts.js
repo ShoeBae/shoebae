@@ -11,6 +11,7 @@ import {
   Typography
 } from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles'
+// import { Delete } from '@material-ui/icons'
 import classNames from 'classnames'
 import {fetchProducts, deleteProduct, selectProduct} from '../store/products'
 
@@ -57,8 +58,7 @@ class AllProducts extends Component {
   constructor() {
     super()
     this.state = {
-      currentView: [],
-      selectedProduct: {}
+      currentView: []
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -116,16 +116,36 @@ class AllProducts extends Component {
                         <Typography gutterBottom variant="h5" component="h2">
                           {product.model}
                         </Typography>
-                        <Typography className={classes.productBrand}>
+                        <Typography>
                           {product.brand}
+                          <br />
+                          ${product.price}
                         </Typography>
-                        <Typography>${product.price}</Typography>
                       </CardContent>
                       <CardActions>
                         {this.props.user.isAdmin ? (
-                          <Button size="small" color="primary">
-                            <Link to="/admin/edit">Edit</Link>
-                          </Button>
+                          <React.Fragment>
+                            <Button
+                              size="small"
+                              color="primary"
+                              onClick={() => {
+                                this.props.selectProduct(product.id)
+                                this.props.history.push('/admin/edit')
+                              }}
+                            >
+                              EDIT
+                            </Button>
+                            <Button
+                              size="small"
+                              color="primary"
+                              onClick={() => {
+                                this.props.selectProduct(product.id)
+                                this.props.history.push('/admin/delete')
+                              }}
+                            >
+                              DELETE
+                            </Button>
+                          </React.Fragment>
                         ) : (
                           <div />
                         )}
@@ -142,9 +162,10 @@ class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = ({products, user}) => ({
+const mapStateToProps = ({products, user}, {history}) => ({
   products: products.productsList,
-  user
+  user,
+  history
 })
 
 const dispatchToProps = dispatch => {

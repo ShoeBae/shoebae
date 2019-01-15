@@ -23,7 +23,6 @@ const initialState = {
  */
 const getProduct = product => ({type: GET_PRODUCT, product})
 const setProducts = products => ({type: SET_PRODUCTS, products})
-const addProduct = product => ({type: ADD_PRODUCT, product})
 const editProduct = product => ({type: EDIT_PRODUCT, product})
 const removeProduct = productID => ({type: REMOVE_PRODUCT, productID})
 
