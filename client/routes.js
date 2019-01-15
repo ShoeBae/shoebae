@@ -48,14 +48,14 @@ class Routes extends Component {
 
         {/* move below route later */}
         {isAdmin && (
-          <React.Fragment>
+          <Switch>
             <Route exact path="/admin" component={AdminHome} />
             <Route path="/admin/orders/:status" component={AdminHome} />
             <Route path="/admin/add" component={AddProduct} />
             <Route path="/admin/edit" component={EditProduct} />
             <Route path="/admin/delete" component={DeleteProduct} />
             <Route path="/" component={AllProducts} />
-          </React.Fragment>
+          </Switch>
         )}
         {isLoggedIn && (
           <Switch>
