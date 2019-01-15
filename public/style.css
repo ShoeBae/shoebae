@@ -112,6 +112,17 @@ form div {
   border-radius: 0px;
 }
 
+.single-product .add-to-cart button {
+  color: #fff;
+  background-color: #000;
+}
+
+.single-product .add-to-cart button.active:hover {
+  background-color: #f02525;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
 .single-product .select-flag {
   margin: 0;
   padding: 5px;

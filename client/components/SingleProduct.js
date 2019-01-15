@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {selectProduct} from '../store/products'
 import {getToCart} from '../store/cart'
@@ -40,7 +40,8 @@ class SingleProduct extends Component {
     }
   }
   render() {
-    const {currentProduct, cart} = this.props
+    const {currentProduct, cart: {adding, items}} = this.props
+    console.log(currentProduct, '<<O CURRRRR')
     if (!currentProduct.model) return <div>Loading...</div>
     return (
       <div className="single-product">
@@ -51,6 +52,8 @@ class SingleProduct extends Component {
           <span>{currentProduct.brand}</span>
           <span>{currentProduct.model}</span>
           <span>${currentProduct.price}</span>
+          <div>*Limited to 1 per order</div>
+
           {currentProduct.sizes[0] ? (
             <form onSubmit={this.handleSubmit} className="add-to-cart">
               <select onChange={this.handleChange}>
@@ -66,17 +69,15 @@ class SingleProduct extends Component {
                   })
                   .sort()}
               </select>
-              {cart.find(item => item.productId === currentProduct.id) ? (
-                <button type="button" disabled>
-                  item currently in cart
+              {items.find(item => item.productId === currentProduct.id) ? (
+                <button disabled type="button">
+                  ADDED
                 </button>
               ) : (
-                <button type="submit">Add To Cart</button>
-              )
-              // size select also needs to get disabled
-              /* note stating product limited to one */
-              // maybe add user ability to change size in cart
-              }
+                <button className="active" type="submit">
+                  {adding ? 'ADDING...' : 'ADD TO CART'}
+                </button>
+              )}
               {this.state.flag && (
                 <div className="select-flag">{this.state.flag}</div>
               )}
@@ -106,3 +107,7 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
+
+// size select also needs to get disabled
+/* note stating product limited to one */
+// maybe add user ability to change size in cart
