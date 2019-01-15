@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {
   withStyles,
@@ -27,36 +27,41 @@ const styles = {
   }
 }
 
-export function ProductReview(props) {
-  const {classes, review, userId, history} = props
+class ProductReview extends Component {
+  constructor() {
+    super()
+    this.state = []
+  }
 
-  return (
-    <Card className={classes.card}>
-      <CardContent>
-        <StarRatings
-          rating={Number(review.rating)}
-          starRatedColor="blue"
-          starDimension="40px"
-          starSpacing="15px"
-        />
-        <Typography component="p">{review.comment}</Typography>
-      </CardContent>
-      {userId === review.userId ? (
-        <Button
-          size="small"
-          color="secondary"
-          className={classes.button}
-          onClick={() =>
-            history.push(`/products/${review.productId}/review/${review.id}`)
-          }
-        >
-          Edit Review
-        </Button>
-      ) : (
-        <div />
-      )}
-    </Card>
-  )
+  render() {
+    return (
+      <Card className={classes.card}>
+        <CardContent>
+          <StarRatings
+            rating={Number(review.rating)}
+            starRatedColor="blue"
+            starDimension="40px"
+            starSpacing="15px"
+          />
+          <Typography component="p">COMMENTS</Typography>
+        </CardContent>
+        {userId === review.userId ? (
+          <Button
+            size="small"
+            color="secondary"
+            className={classes.button}
+            onClick={() =>
+              history.push(`/products/${review.productId}/review/${review.id}`)
+            }
+          >
+            Edit Review
+          </Button>
+        ) : (
+          <div />
+        )}
+      </Card>
+    )
+  }
 }
 
 ProductReview.propTypes = {
