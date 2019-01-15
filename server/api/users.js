@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const _ = require('lodash')
 
 module.exports = router
 
@@ -19,12 +20,9 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const user = await User.update(
-      {
-        email: req.body.email,
-        password: req.body.password
-      },
-      {where: {id: req.params.id}}
+    const userAttributes = _.pick(req.body, User.userFields)
+    const user = await User.findById(req.params.id).then(user =>
+      user.update(userAttributes)
     )
     res.json(user)
   } catch (error) {

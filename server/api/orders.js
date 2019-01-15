@@ -7,7 +7,7 @@ router.get('/', async (req, res, next) => {
   if (isAdmin) {
     try {
       const orders = await Order.findAll({
-        include: [{model: Product}, {model: User}]
+        include: [{model: Product}]
       })
       res.json(orders)
     } catch (error) {
