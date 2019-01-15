@@ -28,37 +28,33 @@ const styles = {
 }
 
 class ProductReview extends Component {
-  constructor() {
-    super()
-    this.state = []
-  }
-
   render() {
+    const {classes, userId, comment} = this.props
     return (
       <Card className={classes.card}>
         <CardContent>
           <StarRatings
-            rating={Number(review.rating)}
+            rating={Number(this.props.rating)}
             starRatedColor="blue"
             starDimension="40px"
             starSpacing="15px"
           />
-          <Typography component="p">COMMENTS</Typography>
+          <Typography component="p">COMMENT</Typography>
         </CardContent>
-        {userId === review.userId ? (
+        {/* {userId ? (
           <Button
             size="small"
             color="secondary"
             className={classes.button}
-            onClick={() =>
-              history.push(`/products/${review.productId}/review/${review.id}`)
-            }
+            // onClick={() =>
+            //   history.push(`/products/${reviews.productId}/review/${reviews.id}`)
+            // }
           >
             Edit Review
           </Button>
         ) : (
           <div />
-        )}
+        )} */}
       </Card>
     )
   }
