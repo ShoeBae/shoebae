@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {selectProduct} from '../store/products'
 import {getToCart} from '../store/cart'
-import ProductReview from '../components/ProductReview'
+import {fetchReviews} from '../store/reviews'
 
 class SingleProduct extends Component {
   state = {
@@ -13,6 +13,7 @@ class SingleProduct extends Component {
   componentDidMount() {
     const {id} = this.props.match.params
     this.props.selectProduct(id)
+    this.props.setReviews()
   }
 
   handleChange = event => {
@@ -99,10 +100,11 @@ class SingleProduct extends Component {
   }
 }
 
-const mapState = ({products: {currentProduct}, user, cart}) => ({
+const mapState = ({products: {currentProduct}, user, cart, reviews}) => ({
   currentProduct,
   user,
-  cart
+  cart,
+  reviews
 })
 
 const mapDispatch = dispatch => ({
@@ -111,6 +113,9 @@ const mapDispatch = dispatch => ({
   },
   addToCart: product => {
     dispatch(getToCart(product))
+  },
+  setReviews: () => {
+    dispatch(fetchReviews())
   }
 })
 

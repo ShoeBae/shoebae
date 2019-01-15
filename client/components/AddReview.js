@@ -65,4 +65,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(null, mapDispatch)(withStyles(styles)(AddProduct))
+export default connect(null, mapDispatch)(withStyles(styles)(AddReview))

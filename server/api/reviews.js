@@ -11,13 +11,9 @@ module.exports = router
 //   }
 // }
 
-router.get('/:productID', requireLogin, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const reviews = await Review.findAll({
-      where: {
-        productId: req.params.productID
-      }
-    })
+    const reviews = await Review.findAll()
     res.json(reviews)
   } catch (err) {
     next(err)
