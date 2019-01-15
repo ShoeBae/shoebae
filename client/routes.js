@@ -54,6 +54,7 @@ class Routes extends Component {
             <Route path="/admin/add" component={AddProduct} />
             <Route path="/admin/edit" component={EditProduct} />
             <Route path="/admin/delete" component={DeleteProduct} />
+            <Route path="/" component={AllProducts} />
           </React.Fragment>
         )}
         {isLoggedIn && (
