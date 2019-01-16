@@ -12,16 +12,25 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 
-const styles = {
+const styles = theme => ({
   root: {
     width: '100%',
     overflowX: 'auto'
   },
   table: {
-    minWidth: 700
+    minWidth: 500
+  },
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
   }
-}
-
+})
 /**
  * COMPONENT
  */
@@ -74,16 +83,24 @@ class AdminHome extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map(order => (
-                <TableRow key={order.id}>
-                  <TableCell component="th" scope="row">
-                    {order.id}
-                  </TableCell>
-                  <TableCell align="right">{order.userId}</TableCell>
-                  <TableCell align="right">{order.status}</TableCell>
-                  <TableCell align="right">{order.totalPrice}</TableCell>
-                </TableRow>
-              ))}
+              {orders
+                .sort()
+                .filter(
+                  order =>
+                    this.state.status
+                      ? order.status === this.state.status
+                      : order
+                )
+                .map(order => (
+                  <TableRow key={order.id}>
+                    <TableCell component="th" scope="row">
+                      {order.id}
+                    </TableCell>
+                    <TableCell align="right">{order.userId}</TableCell>
+                    <TableCell align="right">{order.status}</TableCell>
+                    <TableCell align="right">{order.totalPrice}</TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </Paper>
