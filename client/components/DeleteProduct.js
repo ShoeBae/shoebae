@@ -43,7 +43,6 @@ const styles = theme => ({
 export function DeleteProduct(props) {
   const {classes, currentProduct} = props
 
-  console.log(props)
   return (
     <React.Fragment>
       <div className={classes.layout}>

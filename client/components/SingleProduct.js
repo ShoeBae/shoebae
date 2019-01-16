@@ -1,18 +1,52 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {selectProduct} from '../store/products'
 import {getToCart} from '../store/cart'
-import ProductReview from '../components/ProductReview'
+import {fetchReviews} from '../store/reviews'
+
+import {
+  withStyles,
+  Typography,
+  Card,
+  CardContent,
+  Button
+} from '@material-ui/core/styles'
+import StarRatings from 'react-star-ratings'
+
+const styles = {
+  card: {
+    minWidth: 275,
+    margin: '10px'
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)'
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 22
+  }
+}
 
 class SingleProduct extends Component {
-  state = {
-    selectedSize: '',
-    flag: ''
+  constructor() {
+    super()
+    this.state = {
+      selectedSize: '',
+      flag: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {id} = this.props.match.params
-    this.props.selectProduct(id)
+    await this.props.selectProduct(id)
+    await this.props.setReviews()
   }
 
   handleChange = event => {
@@ -41,7 +75,8 @@ class SingleProduct extends Component {
     }
   }
   render() {
-    const {currentProduct, cart: {adding, items}} = this.props
+    const {currentProduct, cart: {adding, items}, reviews, classes} = this.props
+
     if (!currentProduct.model) return <div>Loading...</div>
     return (
       <div className="single-product">
@@ -78,6 +113,16 @@ class SingleProduct extends Component {
                   {adding ? 'ADDING...' : 'ADD TO CART'}
                 </button>
               )}
+              <button
+                type="button"
+                onClick={() => {
+                  this.props.history.push(
+                    `/products/${currentProduct.id}/reviewform`
+                  )
+                }}
+              >
+                ADD REVIEW
+              </button>
               {this.state.flag && (
                 <div className="select-flag">{this.state.flag}</div>
               )}
@@ -86,23 +131,33 @@ class SingleProduct extends Component {
             <div>No sizes currently available</div>
           )}
         </div>
-        {/* {currentProduct.reviews.map(review => (
-          <ProductReview
-            key={review.id}
-            review={review}
-            userId={userId}
-            history={this.props.history}
-          />
-        ))} */}
+
+        <div>
+          {reviews ? (
+            reviews
+              .filter(review => review.productId === currentProduct.id)
+              .map(review => {
+                return (
+                  <div key={review.id}>
+                    <h3>{review.rating}</h3>
+                    <h3>{review.comment}</h3>
+                  </div>
+                )
+              })
+          ) : (
+            <div>No Reviews</div>
+          )}
+        </div>
       </div>
     )
   }
 }
 
-const mapState = ({products: {currentProduct}, user, cart}) => ({
+const mapState = ({products: {currentProduct}, user, cart, reviews}) => ({
   currentProduct,
   user,
-  cart
+  cart,
+  reviews
 })
 
 const mapDispatch = dispatch => ({
@@ -111,10 +166,13 @@ const mapDispatch = dispatch => ({
   },
   addToCart: product => {
     dispatch(getToCart(product))
+  },
+  setReviews: () => {
+    dispatch(fetchReviews())
   }
 })
 
-export default connect(mapState, mapDispatch)(SingleProduct)
+export default connect(mapState, mapDispatch)(withStyles(styles)(SingleProduct))
 
 // size select also needs to get disabled
 /* note stating product limited to one */

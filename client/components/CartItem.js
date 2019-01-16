@@ -9,7 +9,6 @@ class CartItem extends Component {
   }
 
   render() {
-    console.log(this.props, '<<<PROPS')
     const {product, selectedSize} = this.props
     return (
       <div className="cart-item">

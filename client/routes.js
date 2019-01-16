@@ -13,11 +13,11 @@ import {
   AllProducts,
   AddProduct,
   EditProduct,
-  DeleteProduct
+  DeleteProduct,
+  ReviewForm
 } from './components'
 import {me} from './store'
 import {fetchCart} from './store/cart'
-import productForm from './components/productForm'
 
 /**
  * COMPONENT
@@ -43,24 +43,26 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/products/:id/reviewform" component={ReviewForm} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
 
         {/* move below route later */}
         {isAdmin && (
-          <React.Fragment>
+          <Switch>
             <Route exact path="/admin" component={AdminHome} />
             <Route path="/admin/orders/:status" component={AdminHome} />
             <Route path="/admin/add" component={AddProduct} />
             <Route path="/admin/edit" component={EditProduct} />
             <Route path="/admin/delete" component={DeleteProduct} />
             <Route path="/" component={AllProducts} />
-          </React.Fragment>
+          </Switch>
         )}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/account" component={UserHome} />
+
             <Route path="/" component={AllProducts} />
           </Switch>
         )}
