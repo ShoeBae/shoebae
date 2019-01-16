@@ -35,37 +35,35 @@ class Checkout extends Component {
   }
 
   render() {
-    const {
-      cart: {items, done},
-      orders: {processing},
-      user: {isAdmin}
-    } = this.props
+    const {cart: {items, done}, orders: {processing}, user} = this.props
     const {complete} = this.state
-    if (items.length === 0 && done) return <Redirect to="/cart" />
+    if (items.length === 0 && done && user[0]) return <Redirect to="/cart" />
     return (
-      <div>
-        <div>
+      <div className="checkout flex-center">
+        <div className="checkout-summary">
           <span>Order Summary</span>
           <Link to="/cart">Edit Cart</Link>
         </div>
-        <div>ITEM</div>
-        <div>
+        <div className="checkout-products">ITEMS HERE</div>
+        <div className="checkout-total">
           <span>Order Total</span>
           <span>$blah</span>
         </div>
         {complete ? (
           <div>
             <div>Thank You, your order has been placed! </div>
-            <div>
-              To view your order, please click{' '}
-              <Link to={isAdmin ? '/admin' : '/account'}>here</Link>
-            </div>
+            {user[0] && (
+              <div>
+                To view your order, please click{' '}
+                <Link to={user.isAdmin ? '/admin' : '/account'}>here</Link>
+              </div>
+            )}
           </div>
         ) : (
           <button
             type="button"
             onClick={this.handleClick}
-            className="button-default active"
+            className="button-default active place-order-button"
           >
             {processing ? 'PROCESSING...' : 'PLACE ORDER'}
           </button>

@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
     const order = await Order.create({status: 'created', totalPrice, userId})
     const items = orderItems.map(item => ({...item, orderId: order.id}))
     await OrderItem.bulkCreate(items)
-    console.log(order, ',<<<order')
+    if (!req.user) res.clearCookie('cartId')
     res.json(order)
   } catch (err) {
     next(err)

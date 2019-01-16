@@ -29,13 +29,13 @@ class Cart extends Component {
               </main>
               <div className="summary">
                 <div className="summary--header">
-                  <span>SUMMARY</span>
+                  <span>Summary</span>
                   <span>
                     {items.length} {items.length > 1 ? 'items' : 'item'}
                   </span>
                 </div>
                 <div className="summary--subtotal">
-                  <span>SUBTOTAL</span>
+                  <span>Subtotal</span>
                   <span>
                     {' '}
                     ${items.reduce(
