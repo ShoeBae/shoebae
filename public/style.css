@@ -89,6 +89,11 @@ form div {
   font-size: 2rem;
 }
 
+.shoebaelogo {
+  height: 3em;
+  max-width: 100%;
+}
+
 .navbar-links {
   display: flex;
 }
