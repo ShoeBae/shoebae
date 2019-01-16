@@ -17,6 +17,8 @@ const defaultOrder = {
   processing: false
 }
 
+// fetch orders based on admin, or userId, if logged in
+
 /**
  * ACTION CREATORS
  */
@@ -55,7 +57,7 @@ export const placeOrder = order => async dispatch => {
 export default function(state = defaultOrder, action) {
   switch (action.type) {
     case SET_ORDERS:
-      return action.orders
+      return {...state, orders: action.orders}
     case CREATE_ORDER:
       return {...state, orders: [...state.orders, action]}
     case PROCESSING:

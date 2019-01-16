@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import CartItem from './CartItem'
 
-// going to need a cart item component
-
 class Cart extends Component {
   render() {
     const {cart: {items}} = this.props
@@ -64,8 +62,6 @@ class Cart extends Component {
     )
   }
 }
-
-// my cart or your shopping cart is empty
 
 const mapState = ({cart}) => ({cart})
 

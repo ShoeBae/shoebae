@@ -12,9 +12,7 @@ class UserHome extends Component {
     await this.props.fetchAllOrders()
   }
   render() {
-    const {email, userId, orders} = this.props
-    console.log(orders, '<<ORDERS')
-    console.log(this.props, '<<PROPS')
+    const {email, orders: {orders}} = this.props
 
     return (
       <div>
@@ -33,22 +31,22 @@ class UserHome extends Component {
               <tr>
                 <td>ORDER ID</td>
                 <td>STATUS</td>
-                <td>PRODUCT</td>
                 <td>PRICE</td>
               </tr>
 
-              {/* {orders ? (
-                orders.filter(order => order.userId === userId).map(order => {
+              {orders ? (
+                orders.map(order => {
                   return (
                     <tr key={order.id}>
                       <td>{order.id}</td>
                       <td>{order.status}</td>
+                      <td>{order.totalPrice}</td>
                     </tr>
                   )
                 })
               ) : (
                 <span>~*NO ORDER HISTORY*~</span>
-              )} */}
+              )}
             </tbody>
           </table>
         </div>

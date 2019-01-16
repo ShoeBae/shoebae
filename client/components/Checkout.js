@@ -15,7 +15,6 @@ class Checkout extends Component {
     if (prevOrders.length !== orders.length) {
       this.setState(prevState => ({complete: !prevState.complete}))
       this.props.removeAllFromCart(cartId)
-      // dispatch cart action to empty cart and cart-items in db
       // hook up orders to order history and admin orders
     }
   }
@@ -55,7 +54,6 @@ class Checkout extends Component {
           <div>
             <div>Thank You, your order has been placed! </div>
             <div>
-              {' '}
               To view your order, please click <Link to="/account">here</Link>
             </div>
           </div>
