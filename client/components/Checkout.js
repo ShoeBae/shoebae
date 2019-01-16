@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-// import { Elements } from 'react-stripe-elements'
-// import InjectedStripeForm from './StripeForm'
 import {placeOrder} from '../store/order'
 
 class Checkout extends Component {
@@ -38,9 +36,6 @@ class Checkout extends Component {
     if (cart.items.length === 0) return <Redirect to="/cart" />
     return (
       <div>
-        {/* <Elements>
-          <InjectedStripeForm />
-        </Elements> */}
         <button
           type="button"
           onClick={this.handleClick}

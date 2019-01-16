@@ -5,7 +5,6 @@ import axios from 'axios'
  */
 const GET_PRODUCT = 'GET_PRODUCT'
 const SET_PRODUCTS = 'SET_PRODUCTS'
-const ADD_PRODUCT = 'ADD_PRODUCT'
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
@@ -95,8 +94,8 @@ export default function(state = initialState, action) {
             product.id === action.product.id ? action.product : product
         )
       }
-    case ADD_PRODUCT:
-      return {...state, productsList: [...state.productList, action.product]}
+    // case ADD_PRODUCT:
+    //   return {...state, productsList: [...state.productList, action.product]}
     case REMOVE_PRODUCT:
       return {
         ...state,
