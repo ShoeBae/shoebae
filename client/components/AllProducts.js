@@ -82,7 +82,7 @@ class AllProducts extends Component {
 
   render() {
     if (!this.props.products[0]) {
-      return <div>...loading</div>
+      return <div>loading...</div>
     }
     const {classes} = this.props
     return (

@@ -1,13 +1,12 @@
 const router = require('express').Router()
-const {Order, Product, User} = require('../db/models')
-const {isAdmin} = require('../util')
+const {Order, Product, User, OrderItem} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  if (isAdmin) {
+  if (req.user.isAdmin) {
     try {
       const orders = await Order.findAll({
-        include: [{model: Product}]
+        include: [Product]
       })
       res.json(orders)
     } catch (error) {
@@ -16,11 +15,27 @@ router.get('/', async (req, res, next) => {
   } else {
     try {
       const orders = await Order.findAll({
-        include: [{model: Product}]
+        where: {
+          userId: req.user.id
+        },
+        include: [Product]
       })
       res.json(orders)
     } catch (error) {
       next(error)
     }
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+    const {orderItems, userId, totalPrice} = req.body
+    const order = await Order.create({status: 'created', totalPrice, userId})
+    const items = orderItems.map(item => ({...item, orderId: order.id}))
+    await OrderItem.bulkCreate(items)
+    if (!req.user) res.clearCookie('cartId')
+    res.json(order)
+  } catch (err) {
+    next(err)
   }
 })

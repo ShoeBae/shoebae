@@ -74,6 +74,30 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
+      model: 'OFF-WHITE x Nike Blazer Mid',
+      imageUrl: '/assets/shoes/offwhite-2160-nikeblazermid.jpg',
+      color: 'white',
+      brand: 'Nike',
+      category: 'sneaker',
+      price: 700
+    }),
+    Product.create({
+      model: 'YEEZY S6 BOOTS DESERT RAT',
+      imageUrl: '/assets/shoes/yeezy-S6desertratboots-180.jpg',
+      color: 'brown',
+      brand: 'Yeezy',
+      category: 'boot',
+      price: 300
+    }),
+    Product.create({
+      model: 'OFF-WHITE x Nike Air Vapormax Flyknit',
+      imageUrl: '/assets/shoes/offwhite-airvapormaxflyknit-250.jpg',
+      color: 'white',
+      brand: 'Nike',
+      category: 'sneaker',
+      price: 800
+    }),
+    Product.create({
       model: 'Continental 80',
       imageUrl: '/assets/shoes/adidas-continental80-70.jpg',
       color: 'pink',
@@ -192,22 +216,6 @@ async function seed() {
       brand: 'Nike',
       category: 'sneaker',
       price: 65
-    }),
-    Product.create({
-      model: 'OFF-WHITE x Nike Blazer Mid',
-      imageUrl: '/assets/shoes/offwhite-2160-nikeblazermid.jpg',
-      color: 'white',
-      brand: 'Nike',
-      category: 'sneaker',
-      price: 2160
-    }),
-    Product.create({
-      model: 'OFF-WHITE x Nike Air Vapormax Flyknit',
-      imageUrl: '/assets/shoes/offwhite-airvapormaxflyknit-250.jpg',
-      color: 'white',
-      brand: 'Nike',
-      category: 'sneaker',
-      price: 250
     }),
     Product.create({
       model: 'OFF-WHITE x Converse Chuck 70 Hi Top',
@@ -336,30 +344,30 @@ async function seed() {
       brand: 'Yeezy',
       category: 'sneaker',
       price: 270
-    }),
-    Product.create({
-      model: 'YEEZY S6 BOOTS DESERT RAT',
-      imageUrl: '/assets/shoes/yeezy-S6desertratboots-180.jpg',
-      color: 'brown',
-      brand: 'Yeezy',
-      category: 'boot',
-      price: 180
     })
   ])
 
   const [one, two, three] = products
   const [six, seven, eight, nine, ten, eleven, twelve, thirteen] = sizes
 
-  await one.addSize(six, {through: {quantity: 10}})
-  await one.addSize(seven, {through: {quantity: 10}})
-
-  await two.addSize(eight, {through: {quantity: 10}})
-  await two.addSize(nine, {through: {quantity: 10}})
-  await two.addSize(ten, {through: {quantity: 10}})
+  await two.addSize(six, {through: {quantity: 10}})
+  await two.addSize(seven, {through: {quantity: 10}})
   await two.addSize(eleven, {through: {quantity: 10}})
   await two.addSize(twelve, {through: {quantity: 10}})
   await two.addSize(thirteen, {through: {quantity: 10}})
-  await two.addSize(seven, {through: {quantity: 10}})
+
+  await one.addSize(eight, {through: {quantity: 10}})
+  await one.addSize(nine, {through: {quantity: 10}})
+  await one.addSize(ten, {through: {quantity: 10}})
+  await one.addSize(eleven, {through: {quantity: 10}})
+  await one.addSize(twelve, {through: {quantity: 10}})
+  await one.addSize(thirteen, {through: {quantity: 10}})
+  await one.addSize(seven, {through: {quantity: 10}})
+
+  await three.addSize(eight, {through: {quantity: 10}})
+  await three.addSize(nine, {through: {quantity: 10}})
+  await three.addSize(ten, {through: {quantity: 10}})
+  await three.addSize(eleven, {through: {quantity: 10}})
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)

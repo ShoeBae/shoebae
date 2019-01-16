@@ -24,7 +24,7 @@ class AdminHome extends Component {
     this.setState({status: event.target.value})
   }
   render() {
-    const {email, userId, orders} = this.props
+    const {email, userId, orders: {orders}} = this.props
 
     return (
       <Fragment>
@@ -53,8 +53,8 @@ class AdminHome extends Component {
           <tbody>
             <tr>
               <td>ORDER ID</td>
+              <td>USER ID</td>
               <td>STATUS</td>
-              <td>PRODUCT</td>
               <td>PRICE</td>
             </tr>
             {orders
@@ -67,8 +67,8 @@ class AdminHome extends Component {
                 return (
                   <tr key={order.id}>
                     <td>{order.id}</td>
+                    <td>{order.userId}</td>
                     <td>{order.status}</td>
-                    <td>PRODUCT DETAILS</td>
                     <td>{order.totalPrice}</td>
                   </tr>
                 )

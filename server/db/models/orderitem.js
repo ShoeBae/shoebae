@@ -2,12 +2,13 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const OrderItem = db.define('OrderItem', {
-  quantity: {
+  salePrice: {
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false
+  },
+  size: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      min: 0
-    }
+    allowNull: false
   }
 })
 

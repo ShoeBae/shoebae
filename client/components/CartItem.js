@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {deleteFromCart} from '../store/cart'
+import {Link} from 'react-router-dom'
 
 class CartItem extends Component {
   handleClick = () => {
@@ -12,14 +13,18 @@ class CartItem extends Component {
     const {product, selectedSize} = this.props
     return (
       <div className="cart-item">
-        <div className="cart-item--img" />
+        <Link to={`/products/${product.id}`}>
+          <img src={product.imageUrl} className="cart-item--img" />
+        </Link>
         <div className="cart-item--info">
-          <span>{product.brand}</span>
-          <span>{product.model}</span>
-          <span>{product.color}</span>
+          <Link to={`/products/${product.id}`}>
+            <span>{product.brand}</span>
+            <span>{product.model}</span>
+          </Link>
+          <span>Color: {product.color}</span>
           <span>Size: {selectedSize}</span>
         </div>
-        <div className="flex-center">
+        <div className="cart-item--remove-container flex-center">
           <span className="cart-item--remove" onClick={this.handleClick}>
             remove
           </span>

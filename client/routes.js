@@ -14,6 +14,7 @@ import {
   AddProduct,
   EditProduct,
   DeleteProduct,
+  Checkout,
   ReviewForm
 } from './components'
 import {me} from './store'
@@ -46,6 +47,7 @@ class Routes extends Component {
         <Route path="/products/:id/reviewform" component={ReviewForm} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
 
         {/* move below route later */}
         {isAdmin && (
