@@ -351,19 +351,16 @@ async function seed() {
   await two.addReview(fifth)
   await one.addReview(sixth)
 
-  await two.addSize(six, {through: {quantity: 10}})
-  await two.addSize(seven, {through: {quantity: 10}})
+  await two.addSize(eight, {through: {quantity: 10}})
   await two.addSize(eleven, {through: {quantity: 10}})
   await two.addSize(twelve, {through: {quantity: 10}})
-  await two.addSize(thirteen, {through: {quantity: 10}})
+  await two.addSize(nine, {through: {quantity: 10}})
 
   await one.addSize(eight, {through: {quantity: 10}})
   await one.addSize(nine, {through: {quantity: 10}})
   await one.addSize(ten, {through: {quantity: 10}})
   await one.addSize(eleven, {through: {quantity: 10}})
   await one.addSize(twelve, {through: {quantity: 10}})
-  await one.addSize(thirteen, {through: {quantity: 10}})
-  await one.addSize(seven, {through: {quantity: 10}})
 
   await three.addSize(eight, {through: {quantity: 10}})
   await three.addSize(nine, {through: {quantity: 10}})
