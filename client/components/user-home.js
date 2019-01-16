@@ -36,7 +36,7 @@ class UserHome extends Component {
 
               {orders ? (
                 orders.filter(order => order.userId === userId)
-      .         map(order => {
+      .         .map(order => {
                   return (
                     <tr key={order.id}>
                       <td>{order.id}</td>
