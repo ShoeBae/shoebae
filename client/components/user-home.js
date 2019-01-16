@@ -13,6 +13,8 @@ class UserHome extends Component {
   }
   render() {
     const {email, userId, orders} = this.props
+    console.log(orders, '<<ORDERS')
+    console.log(this.props, '<<PROPS')
 
     return (
       <div>
@@ -35,7 +37,7 @@ class UserHome extends Component {
                 <td>PRICE</td>
               </tr>
 
-              {orders ? (
+              {/* {orders ? (
                 orders.filter(order => order.userId === userId).map(order => {
                   return (
                     <tr key={order.id}>
@@ -46,7 +48,7 @@ class UserHome extends Component {
                 })
               ) : (
                 <span>~*NO ORDER HISTORY*~</span>
-              )}
+              )} */}
             </tbody>
           </table>
         </div>

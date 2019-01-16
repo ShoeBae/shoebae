@@ -53,6 +53,12 @@ form div {
   border: none;
 }
 
+.button-default.active:hover {
+  background-color: #f02525;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
 /*****
 **  App
 *****/
@@ -95,11 +101,14 @@ form div {
 **  Single Product View
 *****/
 
+.single-product-container {
+  max-width: 1200px;
+  background-color: #fff;
+}
+
 .single-product {
   display: flex;
   margin: 10px;
-  max-width: 1200px;
-  background-color: #fff;
 }
 
 .single-product > * {
@@ -125,12 +134,6 @@ form div {
 .single-product .add-to-cart button,
 .single-product .add-to-cart select {
   width: 300px;
-}
-
-.single-product .add-to-cart button.active:hover {
-  background-color: #f02525;
-  cursor: pointer;
-  transition: 0.5s;
 }
 
 .single-product .select-flag {
@@ -164,7 +167,6 @@ form div {
 
 .checkout-button {
   width: 200px;
-  cursor: pointer;
 }
 
 /*****

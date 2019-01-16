@@ -51,7 +51,7 @@ class Cart extends Component {
                   <button
                     onClick={this.handleClick}
                     type="button"
-                    className="button-default checkout-button"
+                    className="button-default active checkout-button"
                   >
                     CONTINUE TO CHECKOUT
                   </button>

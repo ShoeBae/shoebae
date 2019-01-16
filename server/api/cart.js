@@ -39,4 +39,18 @@ router.delete('/', async (req, res, next) => {
   }
 })
 
+router.delete('/all', async (req, res, next) => {
+  try {
+    const {cartId} = req.body
+    await CartItem.destroy({
+      where: {
+        cartId
+      }
+    })
+    res.sendStatus(200)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

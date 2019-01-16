@@ -50,7 +50,7 @@ class SingleProduct extends Component {
   }
 
   handleChange = event => {
-    if (event.target.value.length === 1) {
+    if (event.target.value.length >= 1) {
       this.setState({
         selectedSize: event.target.value
       })
@@ -79,58 +79,58 @@ class SingleProduct extends Component {
 
     if (!currentProduct.model) return <div>Loading...</div>
     return (
-      <div className="single-product">
-        <div className="images">
-          <img src={currentProduct.imageUrl} />
-        </div>
-        <div className="content">
-          <span>{currentProduct.brand}</span>
-          <span>{currentProduct.model}</span>
-          <span>${currentProduct.price}</span>
-          <div>*Limited to 1 per order</div>
+      <div className="single-product-container">
+        <div className="single-product">
+          <div className="images">
+            <img src={currentProduct.imageUrl} />
+          </div>
+          <div className="content">
+            <span>{currentProduct.brand}</span>
+            <span>{currentProduct.model}</span>
+            <span>${currentProduct.price}</span>
+            <div>*Limited to 1 per order</div>
 
-          {currentProduct.sizes[0] ? (
-            <form onSubmit={this.handleSubmit} className="add-to-cart">
-              <select onChange={this.handleChange}>
-                <option>Select A Size</option>
-                {currentProduct.sizes
-                  .map(size => size.length)
-                  .map(size => {
-                    return (
-                      <option key={size} value={size}>
-                        {size}
-                      </option>
-                    )
-                  })
-                  .sort()}
-              </select>
-              {items.find(item => item.productId === currentProduct.id) ? (
-                <button className="button-default" disabled type="button">
-                  ADDED
-                </button>
-              ) : (
-                <button className="button-default active" type="submit">
-                  {adding ? 'ADDING...' : 'ADD TO CART'}
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={() => {
-                  this.props.history.push(
-                    `/products/${currentProduct.id}/reviewform`
-                  )
-                }}
-              >
-                ADD REVIEW
-              </button>
-              {this.state.flag && (
-                <div className="select-flag">{this.state.flag}</div>
-              )}
-            </form>
-          ) : (
-            <div>No sizes currently available</div>
-          )}
+            {currentProduct.sizes[0] ? (
+              <form onSubmit={this.handleSubmit} className="add-to-cart">
+                <select onChange={this.handleChange}>
+                  <option>Select A Size</option>
+                  {currentProduct.sizes
+                    .map(size => size.length)
+                    .map(size => {
+                      return (
+                        <option key={size} value={size}>
+                          {size}
+                        </option>
+                      )
+                    })
+                    .sort()}
+                </select>
+                {items.find(item => item.productId === currentProduct.id) ? (
+                  <button className="button-default" disabled type="button">
+                    ADDED
+                  </button>
+                ) : (
+                  <button className="button-default active" type="submit">
+                    {adding ? 'ADDING...' : 'ADD TO CART'}
+                  </button>
+                )}
+                {this.state.flag && (
+                  <div className="select-flag">{this.state.flag}</div>
+                )}
+              </form>
+            ) : (
+              <div>No sizes currently available</div>
+            )}
+          </div>
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            this.props.history.push(`/products/${currentProduct.id}/reviewform`)
+          }}
+        >
+          ADD REVIEW
+        </button>
 
         <div>
           {reviews ? (

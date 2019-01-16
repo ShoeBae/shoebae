@@ -1,15 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import {placeOrder} from '../store/order'
+import {removeAllFromCart} from '../store/cart'
 
 class Checkout extends Component {
+  state = {
+    complete: false
+  }
+
   componentDidUpdate(prevProps) {
     const {orders: prevOrders} = prevProps.orders
-    const {orders} = this.props.orders
-    if (prevOrders.length > orders.length) {
+    const {orders: {orders}, user: {cartId}} = this.props
+    if (prevOrders.length !== orders.length) {
+      this.setState(prevState => ({complete: !prevState.complete}))
+      this.props.removeAllFromCart(cartId)
       // dispatch cart action to empty cart and cart-items in db
-      // display success component, link to order
       // hook up orders to order history and admin orders
     }
   }
@@ -27,22 +33,41 @@ class Checkout extends Component {
       }
     })
     const userId = this.props.user ? this.props.user.id : null
-    // can I just do the above in the route? ^^^
     this.props.placeOrder({userId, orderItems, totalPrice})
   }
 
   render() {
-    const {cart, orders: {processing}} = this.props
-    if (cart.items.length === 0) return <Redirect to="/cart" />
+    const {cart: {items, done}, orders: {processing}} = this.props
+    const {complete} = this.state
+    if (items.length === 0 && done) return <Redirect to="/cart" />
     return (
       <div>
-        <button
-          type="button"
-          onClick={this.handleClick}
-          className="button-default"
-        >
-          {processing ? 'PROCESSING...' : 'PLACE ORDER'}
-        </button>
+        <div>
+          <span>Order Summary</span>
+          <Link to="/cart">Edit Cart</Link>
+        </div>
+        <div>ITEM</div>
+        <div>
+          <span>Order Total</span>
+          <span>$blah</span>
+        </div>
+        {complete ? (
+          <div>
+            <div>Thank You, your order has been placed! </div>
+            <div>
+              {' '}
+              To view your order, please click <Link to="/account">here</Link>
+            </div>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={this.handleClick}
+            className="button-default active"
+          >
+            {processing ? 'PROCESSING...' : 'PLACE ORDER'}
+          </button>
+        )}
       </div>
     )
   }
@@ -53,6 +78,9 @@ const mapState = ({cart, user, orders}) => ({cart, user, orders})
 const mapProps = dispatch => ({
   placeOrder(order) {
     dispatch(placeOrder(order))
+  },
+  removeAllFromCart(cartId) {
+    dispatch(removeAllFromCart(cartId))
   }
 })
 
