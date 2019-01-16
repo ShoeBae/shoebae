@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Product, User} = require('../db/models')
+const {Order, Product, User, OrderItem} = require('../db/models')
 const {isAdmin} = require('../util')
 module.exports = router
 
@@ -22,5 +22,18 @@ router.get('/', async (req, res, next) => {
     } catch (error) {
       next(error)
     }
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+    const {orderItems, userId, totalPrice} = req.body
+    const order = await Order.create({status: 'created', totalPrice, userId})
+    const items = orderItems.map(item => ({...item, orderId: order.id}))
+    await OrderItem.bulkCreate(items)
+    console.log(order, ',<<<order')
+    res.json(order)
+  } catch (err) {
+    next(err)
   }
 })

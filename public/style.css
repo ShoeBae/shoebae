@@ -41,6 +41,27 @@ form div {
 }
 
 /*****
+**  button defaults
+*****/
+
+.button-default {
+  height: 60px;
+  margin: 5px 0px 0px 0px;
+  border-radius: 0px;
+  color: #fff;
+  background-color: #000;
+  border: none;
+}
+
+/*****
+**  App
+*****/
+
+.app {
+  flex-direction: column;
+}
+
+/*****
 **  NavBar
 *****/
 
@@ -76,18 +97,14 @@ form div {
 
 .single-product {
   display: flex;
-  /* background-color: aqua; */
   margin: 10px;
+  max-width: 1200px;
+  background-color: #fff;
 }
 
 .single-product > * {
   margin: 10px;
 }
-
-/* .single-product .images {
-  flex: 2.5;
-  background-color: teal;
-} */
 
 .single-product .images img {
   height: 300px;
@@ -95,7 +112,7 @@ form div {
 }
 
 .single-product .content {
-  flex: 1.5;
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -107,14 +124,7 @@ form div {
 
 .single-product .add-to-cart button,
 .single-product .add-to-cart select {
-  height: 60px;
-  margin: 5px 0px 0px 0px;
-  border-radius: 0px;
-}
-
-.single-product .add-to-cart button {
-  color: #fff;
-  background-color: #000;
+  width: 300px;
 }
 
 .single-product .add-to-cart button.active:hover {
@@ -136,8 +146,10 @@ form div {
 
 .cart {
   padding: 20px;
-  background-color: magenta;
-  border: 1px solid red;
+  margin: 20px;
+}
+
+.cart-main > * {
   margin: 20px;
 }
 
@@ -150,19 +162,27 @@ form div {
   margin-bottom: 20px;
 }
 
+.checkout-button {
+  width: 200px;
+  cursor: pointer;
+}
+
 /*****
 **  Cart Item
 *****/
 
 .cart-item {
-  background-color: green;
+  background-color: #fff;
   display: flex;
 }
 
 .cart-item > * {
-  flex: 1;
   margin: 10px;
-  background-color: orange;
+}
+
+.cart-item--img {
+  width: 200px;
+  height: 150px;
 }
 
 .cart-item--info {
@@ -171,9 +191,25 @@ form div {
   align-items: flex-start;
 }
 
+.cart-item--info :first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item--info span {
+  color: #000;
+  text-emphasis: none;
+}
+
+.cart-item--info,
+.cart-item--remove-container,
+.cart-item--price {
+  width: 100px;
+}
+
 .cart-item--info > * {
   margin: 5px;
-  flex: 1;
+  text-align: left;
 }
 
 .cart-item--remove {

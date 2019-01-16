@@ -13,10 +13,15 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const cartId = req.user ? req.user.cartId : req.cookies.cartId
-  const {id: productId} = req.body
+  console.log(req.body, '<<<BODY')
+  const {id: productId, selectedSize} = req.body
   try {
-    const result = await CartItem.create({quantity: 1, productId, cartId}) //include on create??? Currently isn't working
-    // compensating for that fact in getToCart thunk
+    const result = await CartItem.create({
+      quantity: 1,
+      productId,
+      cartId,
+      selectedSize
+    })
     res.json(result)
   } catch (err) {
     next(err)

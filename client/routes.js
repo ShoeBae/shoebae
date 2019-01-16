@@ -13,7 +13,8 @@ import {
   AllProducts,
   AddProduct,
   EditProduct,
-  DeleteProduct
+  DeleteProduct,
+  Checkout
 } from './components'
 import {me} from './store'
 import {fetchCart} from './store/cart'
@@ -45,6 +46,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
 
         {/* move below route later */}
         {isAdmin && (

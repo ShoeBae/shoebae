@@ -21,15 +21,43 @@ class Cart extends Component {
         ) : (
           <div className="nonempty">
             <div className="header">My Cart</div>
-            {/* <div>You have {cart.length} item in your cart</div> */}
-            <main>
-              <div className="products">
-                {items.map(product => (
-                  <CartItem {...product} key={product.id + product.brand} />
-                ))}
+            <div className="cart-main flex-center">
+              <main>
+                <div className="products">
+                  {items.map(product => (
+                    <CartItem {...product} key={product.id} />
+                  ))}
+                </div>
+              </main>
+              <div className="summary">
+                <div className="summary--header">
+                  <span>SUMMARY</span>
+                  <span>
+                    {items.length} {items.length > 1 ? 'items' : 'item'}
+                  </span>
+                </div>
+                <div className="summary--subtotal">
+                  <span>SUBTOTAL</span>
+                  <span>
+                    {' '}
+                    ${items.reduce(
+                      (total, product) =>
+                        total + parseFloat(product.product.price),
+                      0
+                    )}
+                  </span>
+                </div>
+                <Link to="/checkout">
+                  <button
+                    onClick={this.handleClick}
+                    type="button"
+                    className="button-default checkout-button"
+                  >
+                    CONTINUE TO CHECKOUT
+                  </button>
+                </Link>
               </div>
-              <div className="summary" />
-            </main>
+            </div>
           </div>
         )}
       </div>

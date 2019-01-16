@@ -70,11 +70,11 @@ class SingleProduct extends Component {
                   .sort()}
               </select>
               {items.find(item => item.productId === currentProduct.id) ? (
-                <button disabled type="button">
+                <button className="button-default" disabled type="button">
                   ADDED
                 </button>
               ) : (
-                <button className="active" type="submit">
+                <button className="button-default active" type="submit">
                   {adding ? 'ADDING...' : 'ADD TO CART'}
                 </button>
               )}

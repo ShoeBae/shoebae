@@ -1,15 +1,15 @@
 import React from 'react'
-
 import {Navbar} from './components'
-
 import Routes from './routes'
-import AllProducts from './components/AllProducts'
+// import {StripeProvider} from 'react-stripe-elements';
 
 const App = () => {
   return (
-    <div>
+    <div className="app flex-center">
       <Navbar />
+      {/* <StripeProvider apiKey="pk_test_yB28R7uMjYczjpjfncMJwAIZ"> */}
       <Routes />
+      {/* </StripeProvider> */}
     </div>
   )
 }
