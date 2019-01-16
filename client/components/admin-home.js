@@ -4,6 +4,23 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchOrders} from '../store/order'
 import SearchContainer from './SearchContainer'
+import {withStyles} from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+
+const styles = {
+  root: {
+    width: '100%',
+    overflowX: 'auto'
+  },
+  table: {
+    minWidth: 700
+  }
+}
 
 /**
  * COMPONENT
@@ -24,7 +41,7 @@ class AdminHome extends Component {
     this.setState({status: event.target.value})
   }
   render() {
-    const {email, userId, orders: {orders}} = this.props
+    const {email, userId, orders: {orders}, classes} = this.props
 
     return (
       <Fragment>
@@ -34,10 +51,7 @@ class AdminHome extends Component {
         <button type="button">
           <Link to="/admin/add">Add Product</Link>
         </button>
-        <h3>ACTIVE CARTS - SHOULD THIS BE AN EVENT TO CHANGE URL?</h3>
-        <h4 href="# ">SHOEBAE CLIENTS </h4>
-        <ul href="#">GUESTS</ul>
-        <br />
+
         <h3>ORDER HISTORY</h3>
         <div className="orderFilter">
           <select name="sortBy" onChange={this.onChange}>
@@ -49,36 +63,37 @@ class AdminHome extends Component {
           </select>
         </div>
 
-        <table href="#">
-          <tbody>
-            <tr>
-              <td>ORDER ID</td>
-              <td>USER ID</td>
-              <td>STATUS</td>
-              <td>PRICE</td>
-            </tr>
-            {orders
-              .sort()
-              .filter(
-                order =>
-                  this.state.status ? order.status === this.state.status : order
-              )
-              .map(order => {
-                return (
-                  <tr key={order.id}>
-                    <td>{order.id}</td>
-                    <td>{order.userId}</td>
-                    <td>{order.status}</td>
-                    <td>{order.totalPrice}</td>
-                  </tr>
-                )
-              })}
-          </tbody>
-        </table>
-        <ul href="#">GUESTS</ul>
+        <Paper className={classes.root}>
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell>ORDER ID</TableCell>
+                <TableCell align="right">USER ID</TableCell>
+                <TableCell align="right">STATUS</TableCell>
+                <TableCell align="right">PRICE</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {orders.map(order => (
+                <TableRow key={order.id}>
+                  <TableCell component="th" scope="row">
+                    {order.id}
+                  </TableCell>
+                  <TableCell align="right">{order.userId}</TableCell>
+                  <TableCell align="right">{order.status}</TableCell>
+                  <TableCell align="right">{order.totalPrice}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Paper>
       </Fragment>
     )
   }
+}
+
+AdminHome.propTypes = {
+  classes: PropTypes.object.isRequired
 }
 
 /**
@@ -99,7 +114,7 @@ const dispatchProps = dispatch => {
   }
 }
 
-export default connect(mapState, dispatchProps)(AdminHome)
+export default connect(mapState, dispatchProps)(withStyles(styles)(AdminHome))
 
 /**
  * PROP TYPES

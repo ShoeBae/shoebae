@@ -7,7 +7,7 @@ import {logout} from '../store/user'
 const Navbar = ({handleClick, isLoggedIn, cartCount, isAdmin}) => (
   <div className="navbar flex-center">
     <Link className="navbar-logo" to="/products">
-      SHOEBAE
+      <img className="shoebaelogo" src="/assets/shoebaelogo.png" />
     </Link>
     <div className="navbar-links">
       {isLoggedIn ? (
