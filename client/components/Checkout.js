@@ -35,19 +35,18 @@ class Checkout extends Component {
   }
 
   render() {
-    const {cart: {items, done}, orders: {processing}, user} = this.props
+    const {cart: {items, done, total}, orders: {processing}, user} = this.props
+    const finalTotal = total
     const {complete} = this.state
-    if (items.length === 0 && done && user[0]) return <Redirect to="/cart" />
+    if (items.length === 0 && complete === false) return <Redirect to="/cart" />
     return (
       <div className="checkout flex-center">
         <div className="checkout-summary">
-          <span>Order Summary</span>
           <Link to="/cart">Edit Cart</Link>
         </div>
-        <div className="checkout-products">ITEMS HERE</div>
         <div className="checkout-total">
           <span>Order Total</span>
-          <span>$blah</span>
+          <span>${finalTotal}</span>
         </div>
         {complete ? (
           <div>

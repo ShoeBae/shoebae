@@ -273,7 +273,10 @@ form div {
   width: 100%;
 }
 
-.checkout-summary,
+.checkout-summary {
+  justify-content: flex-end;
+}
+
 .checkout-total {
   justify-content: space-between;
 }
