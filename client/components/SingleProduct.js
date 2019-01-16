@@ -133,20 +133,30 @@ class SingleProduct extends Component {
         </button>
 
         <div>
-          {reviews ? (
-            reviews
-              .filter(review => review.productId === currentProduct.id)
-              .map(review => {
-                return (
-                  <div key={review.id}>
-                    <h3>{review.rating}</h3>
-                    <h3>{review.comment}</h3>
-                  </div>
-                )
-              })
-          ) : (
-            <div>No Reviews</div>
-          )}
+          <table>
+            <tbody>
+              <tr>
+                <td className="ratingHeader">rating</td>
+                <td />
+                <td className="ratingHeader">review</td>
+              </tr>
+              {reviews ? (
+                reviews
+                  .filter(review => review.productId === currentProduct.id)
+                  .map(review => {
+                    return (
+                      <tr key={review.id}>
+                        <td>{review.rating} </td>
+                        <td />
+                        <td>{review.comment}</td>
+                      </tr>
+                    )
+                  })
+              ) : (
+                <div>No Reviews</div>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     )
