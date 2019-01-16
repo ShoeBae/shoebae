@@ -13,7 +13,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const cartId = req.user ? req.user.cartId : req.cookies.cartId
-  console.log(req.body, '<<<BODY')
   const {id: productId, selectedSize} = req.body
   try {
     const result = await CartItem.create({

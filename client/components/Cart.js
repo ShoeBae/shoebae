@@ -5,7 +5,7 @@ import CartItem from './CartItem'
 
 class Cart extends Component {
   render() {
-    const {cart: {items}} = this.props
+    const {cart: {items, total}} = this.props
     return (
       <div className="cart flex-center">
         {!items[0] ? (
@@ -36,14 +36,7 @@ class Cart extends Component {
                 </div>
                 <div className="summary--subtotal">
                   <span>Subtotal</span>
-                  <span>
-                    {' '}
-                    ${items.reduce(
-                      (total, product) =>
-                        total + parseFloat(product.product.price),
-                      0
-                    )}
-                  </span>
+                  <span>${total}</span>
                 </div>
                 <Link to="/checkout">
                   <button
