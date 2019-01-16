@@ -26,33 +26,11 @@ async function seed() {
   await userTwo.createCart()
 
   const sizes = await Promise.all([
-    Size.create({length: 6}),
-    Size.create({length: 7}),
     Size.create({length: 8}),
     Size.create({length: 9}),
     Size.create({length: 10}),
     Size.create({length: 11}),
-    Size.create({length: 12}),
-    Size.create({length: 13})
-  ])
-
-  const reviews = await Promise.all([
-    Review.create({
-      rating: 5,
-      comment: 'REALLY FREAKIN COOL!'
-    }),
-    Review.create({
-      rating: 4,
-      comment: 'siiiiiiiiiiick'
-    }),
-    Review.create({
-      rating: 1,
-      comment: 'meh'
-    }),
-    Review.create({
-      rating: 4,
-      comment: 'boss babe'
-    })
+    Size.create({length: 12})
   ])
 
   const orders = await Promise.all([
@@ -137,14 +115,7 @@ async function seed() {
       category: 'sneaker',
       price: 70
     }),
-    Product.create({
-      model: 'Crocodile Embossed Ankle Boots',
-      imageUrl: '/assets/shoes/fendi-crocodileembossedankleboots-1550.jpg',
-      color: 'yellow',
-      brand: 'Fendi',
-      category: 'boot',
-      price: 1550
-    }),
+
     Product.create({
       model: 'Classic Lace-Up',
       imageUrl: '/assets/shoes/ferragamo-classiclaceup-295.jpg',
@@ -257,14 +228,7 @@ async function seed() {
       category: 'dress',
       price: 450
     }),
-    Product.create({
-      model: 'Wyatt 40 Harnness Boots',
-      imageUrl: '/assets/shoes/wyatt40harnessboots-saintlaurent-1145.jpg',
-      color: 'black',
-      brand: 'Saint Laurent',
-      category: 'boot',
-      price: 1145
-    }),
+
     Product.create({
       model: 'Chelsea Boots',
       imageUrl: '/assets/shoes/stutterheim-chelseaboots-125.jpg',
@@ -347,22 +311,56 @@ async function seed() {
     })
   ])
 
+  const reviews = await Promise.all([
+    Review.create({
+      rating: 5,
+      comment: 'REALLY FREAKIN COOL!'
+    }),
+    Review.create({
+      rating: 4,
+      comment: 'a little tight in the toebox, but still dope'
+    }),
+    Review.create({
+      rating: 1,
+      comment: 'fell apart when i took them out of the box.'
+    }),
+    Review.create({
+      rating: 4,
+      comment:
+        'been waiting MONTHS for this shoe to be back in stock -- be better SHOEBAE, but also, like, thanks for making my dreams come true'
+    }),
+    Review.create({
+      rating: 4,
+      comment: 'true to size, color is WAY different in the real world'
+    }),
+    Review.create({
+      rating: 1,
+      comment:
+        'basically a scam - i mean i know they are real, but they look fake. returning these asap'
+    })
+  ])
   const [one, two, three] = products
-  const [six, seven, eight, nine, ten, eleven, twelve, thirteen] = sizes
+  const [eight, nine, ten, eleven, twelve] = sizes
 
-  await two.addSize(six, {through: {quantity: 10}})
-  await two.addSize(seven, {through: {quantity: 10}})
+  const [first, second, third, fourth, fifth, sixth] = reviews
+
+  await one.addReview(first)
+  await one.addReview(second)
+  await two.addReview(third)
+  await three.addReview(fourth)
+  await two.addReview(fifth)
+  await one.addReview(sixth)
+
+  await two.addSize(eight, {through: {quantity: 10}})
   await two.addSize(eleven, {through: {quantity: 10}})
   await two.addSize(twelve, {through: {quantity: 10}})
-  await two.addSize(thirteen, {through: {quantity: 10}})
+  await two.addSize(nine, {through: {quantity: 10}})
 
   await one.addSize(eight, {through: {quantity: 10}})
   await one.addSize(nine, {through: {quantity: 10}})
   await one.addSize(ten, {through: {quantity: 10}})
   await one.addSize(eleven, {through: {quantity: 10}})
   await one.addSize(twelve, {through: {quantity: 10}})
-  await one.addSize(thirteen, {through: {quantity: 10}})
-  await one.addSize(seven, {through: {quantity: 10}})
 
   await three.addSize(eight, {through: {quantity: 10}})
   await three.addSize(nine, {through: {quantity: 10}})
